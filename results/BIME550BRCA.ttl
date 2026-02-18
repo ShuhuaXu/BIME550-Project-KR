@@ -1,0 +1,149 @@
+@prefix : <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/> .
+
+<http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA> rdf:type owl:Ontology .
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Basal
+:Basal rdf:type owl:Class ;
+       rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Breast_Cancer_SubType> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#ERBB2
+:ERBB2 rdf:type owl:Class ;
+       rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#FrameShiftDeletion
+:FrameShiftDeletion rdf:type owl:Class ;
+                    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#FrameShiftInsertion
+:FrameShiftInsertion rdf:type owl:Class ;
+                     rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Her2
+:Her2 rdf:type owl:Class ;
+      rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Breast_Cancer_SubType> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#InFrameDeletion
+:InFrameDeletion rdf:type owl:Class ;
+                 rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#InFrameInsertion
+:InFrameInsertion rdf:type owl:Class ;
+                  rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Intron
+:Intron rdf:type owl:Class ;
+        rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#LumA
+:LumA rdf:type owl:Class ;
+      rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Breast_Cancer_SubType> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#LumB
+:LumB rdf:type owl:Class ;
+      rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Breast_Cancer_SubType> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Missense
+:Missense rdf:type owl:Class ;
+          rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Nonsense
+:Nonsense rdf:type owl:Class ;
+          rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#NonstopMutation
+:NonstopMutation rdf:type owl:Class ;
+                 rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Normal
+:Normal rdf:type owl:Class ;
+        rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Breast_Cancer_SubType> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#RNA
+:RNA rdf:type owl:Class ;
+     rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Silent
+:Silent rdf:type owl:Class ;
+        rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#SpliceSite
+:SpliceSite rdf:type owl:Class ;
+            rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#TranslationStartSite
+:TranslationStartSite rdf:type owl:Class ;
+                      rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#3PrimeFlank
+<http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#3PrimeFlank> rdf:type owl:Class ;
+                                                                                rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#3PrimeUTR
+<http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#3PrimeUTR> rdf:type owl:Class ;
+                                                                              rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#5PrimeFlank
+<http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#5PrimeFlank> rdf:type owl:Class ;
+                                                                                rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#5PrimeUTR
+<http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#5PrimeUTR> rdf:type owl:Class ;
+                                                                              rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Breast_Cancer_SubType
+<http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Breast_Cancer_SubType> rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene
+<http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation
+<http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation_Effect
+<http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation_Effect> rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway
+<http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Patient
+<http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Patient> rdf:type owl:Class .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
