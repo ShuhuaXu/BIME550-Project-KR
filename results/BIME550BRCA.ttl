@@ -9,97 +9,89 @@
 <http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA> rdf:type owl:Ontology .
 
 #################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Gene
+:Gene rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Pathway
+:Pathway rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#hasEnriched
+:hasEnriched rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :Pathway .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#hasMutation
+:hasMutation rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :Gene .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#hasNegative
+:hasNegative rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :Pathway .
+
+
+#################################################################
 #    Classes
 #################################################################
 
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Basal
-:Basal rdf:type owl:Class ;
-       rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Breast_Cancer_SubType> .
-
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#ERBB2
-:ERBB2 rdf:type owl:Class ;
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#BRCA1
+:BRCA1 rdf:type owl:Class ;
        rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
 
 
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#FrameShiftDeletion
-:FrameShiftDeletion rdf:type owl:Class ;
-                    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#BRCA2
+:BRCA2 rdf:type owl:Class ;
+       rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
 
 
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#FrameShiftInsertion
-:FrameShiftInsertion rdf:type owl:Class ;
-                     rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#ER
+:ER rdf:type owl:Class ;
+    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
 
 
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Her2
-:Her2 rdf:type owl:Class ;
-      rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Breast_Cancer_SubType> .
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#ER-related_pathway
+:ER-related_pathway rdf:type owl:Class ;
+                    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> .
 
 
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#InFrameDeletion
-:InFrameDeletion rdf:type owl:Class ;
-                 rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#HER2
+:HER2 rdf:type owl:Class ;
+      rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
 
 
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#InFrameInsertion
-:InFrameInsertion rdf:type owl:Class ;
-                  rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#HER2-related_pathway
+:HER2-related_pathway rdf:type owl:Class ;
+                      rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> .
 
 
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Intron
-:Intron rdf:type owl:Class ;
-        rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Ki-67
+:Ki-67 rdf:type owl:Class ;
+       rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
 
 
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#LumA
-:LumA rdf:type owl:Class ;
-      rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Breast_Cancer_SubType> .
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Ki-67-related_pathway
+:Ki-67-related_pathway rdf:type owl:Class ;
+                       rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> .
 
 
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#LumB
-:LumB rdf:type owl:Class ;
-      rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Breast_Cancer_SubType> .
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#PR
+:PR rdf:type owl:Class ;
+    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
 
 
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Missense
-:Missense rdf:type owl:Class ;
-          rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#PR-related_pathway
+:PR-related_pathway rdf:type owl:Class ;
+                    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> .
 
 
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Nonsense
-:Nonsense rdf:type owl:Class ;
-          rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
-
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#NonstopMutation
-:NonstopMutation rdf:type owl:Class ;
-                 rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
-
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Normal
-:Normal rdf:type owl:Class ;
-        rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Breast_Cancer_SubType> .
-
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#RNA
-:RNA rdf:type owl:Class ;
-     rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
-
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Silent
-:Silent rdf:type owl:Class ;
-        rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
-
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#SpliceSite
-:SpliceSite rdf:type owl:Class ;
-            rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
-
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#TranslationStartSite
-:TranslationStartSite rdf:type owl:Class ;
-                      rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#TP53
+:TP53 rdf:type owl:Class ;
+      rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
 
 
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#3PrimeFlank
@@ -144,6 +136,219 @@
 
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Patient
 <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Patient> rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Basal
+:Basal rdf:type owl:Class ;
+       owl:equivalentClass [ owl:intersectionOf ( [ rdf:type owl:Class ;
+                                                    owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty :hasMutation ;
+                                                                    owl:someValuesFrom :BRCA1
+                                                                  ]
+                                                                  [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty :hasMutation ;
+                                                                    owl:someValuesFrom :BRCA2
+                                                                  ]
+                                                                )
+                                                  ]
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :hasEnriched ;
+                                                    owl:someValuesFrom :Ki-67-related_pathway
+                                                  ]
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :hasMutation ;
+                                                    owl:someValuesFrom :TP53
+                                                  ]
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :hasNegative ;
+                                                    owl:someValuesFrom :ER-related_pathway
+                                                  ]
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :hasNegative ;
+                                                    owl:someValuesFrom :HER2-related_pathway
+                                                  ]
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :hasNegative ;
+                                                    owl:someValuesFrom :PR-related_pathway
+                                                  ]
+                                                ) ;
+                             rdf:type owl:Class
+                           ] ;
+       rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Breast_Cancer_SubType> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/ERBB2
+:ERBB2 rdf:type owl:Class ;
+       rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/FrameShiftDeletion
+:FrameShiftDeletion rdf:type owl:Class ;
+                    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/FrameShiftInsertion
+:FrameShiftInsertion rdf:type owl:Class ;
+                     rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Her2
+:Her2 rdf:type owl:Class ;
+      owl:equivalentClass [ owl:intersectionOf ( [ rdf:type owl:Class ;
+                                                   owl:unionOf ( [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :hasEnriched ;
+                                                                                          owl:someValuesFrom :ER-related_pathway
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :hasNegative ;
+                                                                                          owl:someValuesFrom :Ki-67-related_pathway
+                                                                                        ]
+                                                                                      ) ;
+                                                                   rdf:type owl:Class
+                                                                 ]
+                                                                 [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :hasEnriched ;
+                                                                                          owl:someValuesFrom :Ki-67-related_pathway
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :hasNegative ;
+                                                                                          owl:someValuesFrom :ER-related_pathway
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :hasNegative ;
+                                                                                          owl:someValuesFrom :PR-related_pathway
+                                                                                        ]
+                                                                                      ) ;
+                                                                   rdf:type owl:Class
+                                                                 ]
+                                                               )
+                                                 ]
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty :hasEnriched ;
+                                                   owl:someValuesFrom :HER2-related_pathway
+                                                 ]
+                                               ) ;
+                            rdf:type owl:Class
+                          ] ;
+      rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Breast_Cancer_SubType> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/InFrameDeletion
+:InFrameDeletion rdf:type owl:Class ;
+                 rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/InFrameInsertion
+:InFrameInsertion rdf:type owl:Class ;
+                  rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Intron
+:Intron rdf:type owl:Class ;
+        rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/LumA
+:LumA rdf:type owl:Class ;
+      owl:equivalentClass [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                   owl:onProperty :hasEnriched ;
+                                                   owl:someValuesFrom :ER-related_pathway
+                                                 ]
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty :hasEnriched ;
+                                                   owl:someValuesFrom :PR-related_pathway
+                                                 ]
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty :hasNegative ;
+                                                   owl:someValuesFrom :Ki-67-related_pathway
+                                                 ]
+                                               ) ;
+                            rdf:type owl:Class
+                          ] ;
+      rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Breast_Cancer_SubType> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/LumB
+:LumB rdf:type owl:Class ;
+      owl:equivalentClass [ owl:intersectionOf ( [ rdf:type owl:Class ;
+                                                   owl:unionOf ( [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :hasEnriched ;
+                                                                                          owl:someValuesFrom :Ki-67-related_pathway
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :hasNegative ;
+                                                                                          owl:someValuesFrom :HER2-related_pathway
+                                                                                        ]
+                                                                                      ) ;
+                                                                   rdf:type owl:Class
+                                                                 ]
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :hasEnriched ;
+                                                                   owl:someValuesFrom :HER2-related_pathway
+                                                                 ]
+                                                               )
+                                                 ]
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty :hasEnriched ;
+                                                   owl:someValuesFrom :ER-related_pathway
+                                                 ]
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty :hasNegative ;
+                                                   owl:someValuesFrom :PR-related_pathway
+                                                 ]
+                                               ) ;
+                            rdf:type owl:Class
+                          ] ;
+      rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Breast_Cancer_SubType> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Missense
+:Missense rdf:type owl:Class ;
+          rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Nonsense
+:Nonsense rdf:type owl:Class ;
+          rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/NonstopMutation
+:NonstopMutation rdf:type owl:Class ;
+                 rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Normal
+:Normal rdf:type owl:Class ;
+        owl:equivalentClass [ rdf:type owl:Class ;
+                              owl:complementOf [ rdf:type owl:Class ;
+                                                 owl:unionOf ( :Basal
+                                                               :Her2
+                                                               :LumA
+                                                               :LumB
+                                                             )
+                                               ]
+                            ] ;
+        rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Breast_Cancer_SubType> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/RNA
+:RNA rdf:type owl:Class ;
+     rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Silent
+:Silent rdf:type owl:Class ;
+        rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/SpliceSite
+:SpliceSite rdf:type owl:Class ;
+            rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/TranslationStartSite
+:TranslationStartSite rdf:type owl:Class ;
+                      rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
 
 
 ###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
