@@ -20,56 +20,48 @@
 #    Object Properties
 #################################################################
 
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Mutation
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Gene
+:Gene rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Mutation
 :Mutation rdf:type owl:ObjectProperty .
 
 
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Patient
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Patient
 :Patient rdf:type owl:ObjectProperty .
 
 
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#downregulatesPathway
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/downregulatesPathway
 :downregulatesPathway rdf:type owl:ObjectProperty ;
                       rdfs:subPropertyOf :Mutation .
 
 
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#hasDownregulatedPathway
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/hasDownregulatedPathway
 :hasDownregulatedPathway rdf:type owl:ObjectProperty ;
                          rdfs:subPropertyOf :Patient ;
                          owl:propertyDisjointWith :hasUpregulatedPathway .
 
 
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#hasMutation
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/hasMutation
 :hasMutation rdf:type owl:ObjectProperty ;
-             rdfs:subPropertyOf :Patient .
+             rdfs:subPropertyOf :Gene ,
+                                :Patient .
 
 
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#hasUpregulatedPathway
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/hasUpregulatedPathway
 :hasUpregulatedPathway rdf:type owl:ObjectProperty ;
                        rdfs:subPropertyOf :Patient .
 
 
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#upregulatesPathway
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/upregulatesPathway
 :upregulatesPathway rdf:type owl:ObjectProperty ;
                     rdfs:subPropertyOf :Mutation .
-
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Gene
-:Gene rdf:type owl:ObjectProperty .
-
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/hasMutation
-:hasMutation rdf:type owl:ObjectProperty ;
-             rdfs:subPropertyOf :Gene .
 
 
 #################################################################
 #    Classes
 #################################################################
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Patient
-:Patient rdf:type owl:Class .
-
 
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#BreastCancerSubType
 <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#BreastCancerSubType> rdf:type owl:Class .
@@ -84,48 +76,7 @@
 
 
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway
-<http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> rdf:type owl:Class ;
-                                                                                    owl:equivalentClass [ owl:intersectionOf ( :Patient
-                                                                                                                               [ rdf:type owl:Class ;
-                                                                                                                                 owl:unionOf ( [ rdf:type owl:Restriction ;
-                                                                                                                                                 owl:onProperty :hasMutation ;
-                                                                                                                                                 owl:someValuesFrom :BRCA1
-                                                                                                                                               ]
-                                                                                                                                               [ rdf:type owl:Restriction ;
-                                                                                                                                                 owl:onProperty :hasMutation ;
-                                                                                                                                                 owl:someValuesFrom :BRCA2
-                                                                                                                                               ]
-                                                                                                                                             )
-                                                                                                                               ]
-                                                                                                                               [ rdf:type owl:Class ;
-                                                                                                                                 owl:complementOf [ rdf:type owl:Restriction ;
-                                                                                                                                                    owl:onProperty :hasUpregulatedPathway ;
-                                                                                                                                                    owl:someValuesFrom :ER-related_pathway
-                                                                                                                                                  ]
-                                                                                                                               ]
-                                                                                                                               [ rdf:type owl:Class ;
-                                                                                                                                 owl:complementOf [ rdf:type owl:Restriction ;
-                                                                                                                                                    owl:onProperty :hasUpregulatedPathway ;
-                                                                                                                                                    owl:someValuesFrom :HER2-related_pathway
-                                                                                                                                                  ]
-                                                                                                                               ]
-                                                                                                                               [ rdf:type owl:Class ;
-                                                                                                                                 owl:complementOf [ rdf:type owl:Restriction ;
-                                                                                                                                                    owl:onProperty :hasUpregulatedPathway ;
-                                                                                                                                                    owl:someValuesFrom :PR-related_pathway
-                                                                                                                                                  ]
-                                                                                                                               ]
-                                                                                                                               [ rdf:type owl:Restriction ;
-                                                                                                                                 owl:onProperty :hasMutation ;
-                                                                                                                                 owl:someValuesFrom :TP53
-                                                                                                                               ]
-                                                                                                                               [ rdf:type owl:Restriction ;
-                                                                                                                                 owl:onProperty :hasUpregulatedPathway ;
-                                                                                                                                 owl:someValuesFrom :Ki-67-related_pathway
-                                                                                                                               ]
-                                                                                                                             ) ;
-                                                                                                          rdf:type owl:Class
-                                                                                                        ] .
+<http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> rdf:type owl:Class .
 
 
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/BRCA1
@@ -352,6 +303,10 @@
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/PR-related_pathway
 :PR-related_pathway rdf:type owl:Class ;
                     rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Patient
+:Patient rdf:type owl:Class .
 
 
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/TP53
