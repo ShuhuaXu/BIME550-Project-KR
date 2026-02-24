@@ -20,16 +20,6 @@
 #    Object Properties
 #################################################################
 
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#hasGoF
-:hasGoF rdf:type owl:ObjectProperty ;
-        rdfs:subPropertyOf :Patient .
-
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#hasLoF
-:hasLoF rdf:type owl:ObjectProperty ;
-        rdfs:subPropertyOf :Patient .
-
-
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Gene
 :Gene rdf:type owl:ObjectProperty .
 
@@ -53,6 +43,21 @@
                          owl:propertyDisjointWith :hasUpregulatedPathway .
 
 
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/hasEffect
+:hasEffect rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :Mutation .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/hasGoF
+:hasGoF rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf :Patient .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/hasLoF
+:hasLoF rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf :Patient .
+
+
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/hasMutation
 :hasMutation rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf :Gene ,
@@ -67,19 +72,6 @@
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/upregulatesPathway
 :upregulatesPathway rdf:type owl:ObjectProperty ;
                     rdfs:subPropertyOf :Mutation .
-
-
-#################################################################
-#    Data properties
-#################################################################
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Mutation
-:Mutation rdf:type owl:DatatypeProperty .
-
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#hasEffect
-:hasEffect rdf:type owl:DatatypeProperty ;
-           rdfs:subPropertyOf :Mutation .
 
 
 #################################################################
@@ -341,49 +333,35 @@
 
 
 #################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/GoF
+:GoF rdf:type owl:NamedIndividual ,
+              <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/LoF
+:LoF rdf:type owl:NamedIndividual ,
+              <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Others
+:Others rdf:type owl:NamedIndividual ,
+                 <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+#################################################################
 #    Rules
 #################################################################
 
 :pt rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
 
+:g rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
 :m rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
 
 :p rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
-
-[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
-   rdfs:comment "" ;
-   rdfs:label "S3" ;
-   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
-   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
-                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Patient ;
-                                                       <http://www.w3.org/2003/11/swrl#argument1> :pt
-                                                     ] ;
-                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
-                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasMutation ;
-                                                                  <http://www.w3.org/2003/11/swrl#argument1> :pt ;
-                                                                  <http://www.w3.org/2003/11/swrl#argument2> :m
-                                                                ] ;
-                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasEffect ;
-                                                                             <http://www.w3.org/2003/11/swrl#argument1> :m ;
-                                                                             <http://www.w3.org/2003/11/swrl#argument2> "LoF"
-                                                                           ] ;
-                                                                 rdf:rest rdf:nil
-                                                               ]
-                                                    ]
-                                         ] ;
-   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
-                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLoF ;
-                                                       <http://www.w3.org/2003/11/swrl#argument1> :pt ;
-                                                       <http://www.w3.org/2003/11/swrl#argument2> :m
-                                                     ] ;
-                                           rdf:rest rdf:nil
-                                         ]
- ] .
 
 [ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
    rdfs:comment "" ;
@@ -465,18 +443,31 @@
                                                        <http://www.w3.org/2003/11/swrl#argument1> :pt
                                                      ] ;
                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
-                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasMutation ;
-                                                                  <http://www.w3.org/2003/11/swrl#argument1> :pt ;
-                                                                  <http://www.w3.org/2003/11/swrl#argument2> :m
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#classPredicate> <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> :g
                                                                 ] ;
                                                       rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasEffect ;
-                                                                             <http://www.w3.org/2003/11/swrl#argument1> :m ;
-                                                                             <http://www.w3.org/2003/11/swrl#argument2> "GoF"
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasMutation ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> :pt ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> :m
                                                                            ] ;
-                                                                 rdf:rest rdf:nil
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasMutation ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> :g ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> :m
+                                                                                      ] ;
+                                                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasEffect ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument1> :m ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> :GoF
+                                                                                                 ] ;
+                                                                                       rdf:rest rdf:nil
+                                                                                     ]
+                                                                          ]
                                                                ]
                                                     ]
                                          ] ;
@@ -484,7 +475,55 @@
                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasGoF ;
                                                        <http://www.w3.org/2003/11/swrl#argument1> :pt ;
-                                                       <http://www.w3.org/2003/11/swrl#argument2> :m
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :g
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S3" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Patient ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :pt
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#classPredicate> <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> :g
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasMutation ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> :pt ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> :m
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasMutation ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> :g ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> :m
+                                                                                      ] ;
+                                                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasEffect ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument1> :m ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> :LoF
+                                                                                                 ] ;
+                                                                                       rdf:rest rdf:nil
+                                                                                     ]
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLoF ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :pt ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :g
                                                      ] ;
                                            rdf:rest rdf:nil
                                          ]
