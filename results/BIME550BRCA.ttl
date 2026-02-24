@@ -12,25 +12,25 @@
 #    Object Properties
 #################################################################
 
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Gene
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Gene
 :Gene rdf:type owl:ObjectProperty .
 
 
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Pathway
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Pathway
 :Pathway rdf:type owl:ObjectProperty .
 
 
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#hasEnriched
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/hasEnriched
 :hasEnriched rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf :Pathway .
 
 
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#hasMutation
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/hasMutation
 :hasMutation rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf :Gene .
 
 
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#hasNegative
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/hasNegative
 :hasNegative rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf :Pathway .
 
@@ -39,59 +39,19 @@
 #    Classes
 #################################################################
 
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#BRCA1
-:BRCA1 rdf:type owl:Class ;
-       rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#gain_of_function
+:gain_of_function rdf:type owl:Class ;
+                  rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation_Effect> .
 
 
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#BRCA2
-:BRCA2 rdf:type owl:Class ;
-       rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#loss_of_function
+:loss_of_function rdf:type owl:Class ;
+                  rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation_Effect> .
 
 
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#ER
-:ER rdf:type owl:Class ;
-    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
-
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#ER-related_pathway
-:ER-related_pathway rdf:type owl:Class ;
-                    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> .
-
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#HER2
-:HER2 rdf:type owl:Class ;
-      rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
-
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#HER2-related_pathway
-:HER2-related_pathway rdf:type owl:Class ;
-                      rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> .
-
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Ki-67
-:Ki-67 rdf:type owl:Class ;
-       rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
-
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Ki-67-related_pathway
-:Ki-67-related_pathway rdf:type owl:Class ;
-                       rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> .
-
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#PR
-:PR rdf:type owl:Class ;
-    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
-
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#PR-related_pathway
-:PR-related_pathway rdf:type owl:Class ;
-                    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> .
-
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#TP53
-:TP53 rdf:type owl:Class ;
-      rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#partial_loss_of_function
+:partial_loss_of_function rdf:type owl:Class ;
+                          rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation_Effect> .
 
 
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#3PrimeFlank
@@ -138,6 +98,16 @@
 <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Patient> rdf:type owl:Class .
 
 
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/BRCA1
+:BRCA1 rdf:type owl:Class ;
+       rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/BRCA2
+:BRCA2 rdf:type owl:Class ;
+       rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
+
+
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Basal
 :Basal rdf:type owl:Class ;
        owl:equivalentClass [ owl:intersectionOf ( [ rdf:type owl:Class ;
@@ -177,6 +147,16 @@
        rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Breast_Cancer_SubType> .
 
 
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/ER
+:ER rdf:type owl:Class ;
+    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/ER-related_pathway
+:ER-related_pathway rdf:type owl:Class ;
+                    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> .
+
+
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/ERBB2
 :ERBB2 rdf:type owl:Class ;
        rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
@@ -190,6 +170,16 @@
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/FrameShiftInsertion
 :FrameShiftInsertion rdf:type owl:Class ;
                      rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/HER2
+:HER2 rdf:type owl:Class ;
+      rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/HER2-related_pathway
+:HER2-related_pathway rdf:type owl:Class ;
+                      rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> .
 
 
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Her2
@@ -246,6 +236,16 @@
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Intron
 :Intron rdf:type owl:Class ;
         rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Ki-67
+:Ki-67 rdf:type owl:Class ;
+       rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Ki-67-related_pathway
+:Ki-67-related_pathway rdf:type owl:Class ;
+                       rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> .
 
 
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/LumA
@@ -331,6 +331,16 @@
         rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Breast_Cancer_SubType> .
 
 
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/PR
+:PR rdf:type owl:Class ;
+    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/PR-related_pathway
+:PR-related_pathway rdf:type owl:Class ;
+                    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> .
+
+
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/RNA
 :RNA rdf:type owl:Class ;
      rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
@@ -344,6 +354,11 @@
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/SpliceSite
 :SpliceSite rdf:type owl:Class ;
             rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/TP53
+:TP53 rdf:type owl:Class ;
+      rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
 
 
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/TranslationStartSite
