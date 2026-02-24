@@ -78,6 +78,51 @@
 #    Classes
 #################################################################
 
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Constitutive_Signaling_by_AKT1_E17K_in_Cancer
+:Constitutive_Signaling_by_AKT1_E17K_in_Cancer rdf:type owl:Class ;
+                                               rdfs:subClassOf :ER-related_pathway .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer
+:Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer rdf:type owl:Class ;
+                                                   rdfs:subClassOf :ER-related_pathway .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Defective_translocation_of_RB1_mutants_to_the_nucleus
+:Defective_translocation_of_RB1_mutants_to_the_nucleus rdf:type owl:Class ;
+                                                       rdfs:subClassOf :ER-related_pathway .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability
+:Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability rdf:type owl:Class ;
+                                                                           rdfs:subClassOf :ER-related_pathway .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#PTEN_Loss_of_Function_in_Cancer
+:PTEN_Loss_of_Function_in_Cancer rdf:type owl:Class ;
+                                 rdfs:subClassOf :ER-related_pathway .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#SMAD4_MH2_Domain_Mutants_in_Cancer
+:SMAD4_MH2_Domain_Mutants_in_Cancer rdf:type owl:Class ;
+                                    rdfs:subClassOf :ER-related_pathway .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Signaling_by_ERBB2_ECD_mutants
+:Signaling_by_ERBB2_ECD_mutants rdf:type owl:Class ;
+                                rdfs:subClassOf :HER2-related_pathway .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Signaling_by_ERBB2_KD_Mutants
+:Signaling_by_ERBB2_KD_Mutants rdf:type owl:Class ;
+                               rdfs:subClassOf :HER2-related_pathway .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Signaling_by_ERBB2_TMD/JMD_mutants
+<http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Signaling_by_ERBB2_TMD/JMD_mutants> rdf:type owl:Class ;
+                                                                                                       rdfs:subClassOf :HER2-related_pathway .
+
+
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#BreastCancerSubType
 <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#BreastCancerSubType> rdf:type owl:Class .
 
