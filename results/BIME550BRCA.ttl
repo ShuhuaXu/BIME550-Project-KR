@@ -20,103 +20,113 @@
 #    Object Properties
 #################################################################
 
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Gene
-:Gene rdf:type owl:ObjectProperty .
-
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Mutation
-:Mutation rdf:type owl:ObjectProperty .
-
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Patient
-:Patient rdf:type owl:ObjectProperty .
-
-
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/downregulatesPathway
 :downregulatesPathway rdf:type owl:ObjectProperty ;
-                      rdfs:subPropertyOf :Mutation .
+                      rdfs:subPropertyOf owl:topObjectProperty ;
+                      rdfs:domain [ rdf:type owl:Restriction ;
+                                    owl:onProperty :downregulatesPathway ;
+                                    owl:someValuesFrom <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>
+                                  ] ;
+                      rdfs:range [ rdf:type owl:Restriction ;
+                                   owl:onProperty :downregulatesPathway ;
+                                   owl:someValuesFrom <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>
+                                 ] ;
+                      owl:propertyDisjointWith :upregulatesPathway .
 
 
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/hasDownregulatedPathway
 :hasDownregulatedPathway rdf:type owl:ObjectProperty ;
-                         rdfs:subPropertyOf :Patient ;
+                         rdfs:subPropertyOf owl:topObjectProperty ;
+                         rdfs:domain [ rdf:type owl:Restriction ;
+                                       owl:onProperty :hasDownregulatedPathway ;
+                                       owl:someValuesFrom :Patient
+                                     ] ;
+                         rdfs:range [ rdf:type owl:Restriction ;
+                                      owl:onProperty :hasEffect ;
+                                      owl:someValuesFrom <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>
+                                    ] ;
                          owl:propertyDisjointWith :hasUpregulatedPathway .
 
 
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/hasEffect
 :hasEffect rdf:type owl:ObjectProperty ;
-           rdfs:subPropertyOf :Mutation .
+           rdfs:subPropertyOf owl:topObjectProperty ;
+           rdfs:domain [ rdf:type owl:Restriction ;
+                         owl:onProperty :hasEffect ;
+                         owl:someValuesFrom <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>
+                       ] ;
+           rdfs:range [ rdf:type owl:Restriction ;
+                        owl:onProperty :hasEffect ;
+                        owl:someValuesFrom :Mutation_Effect
+                      ] .
 
 
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/hasGoF
 :hasGoF rdf:type owl:ObjectProperty ;
-        rdfs:subPropertyOf :Patient .
+        rdfs:subPropertyOf :hasMutation ,
+                           owl:topObjectProperty ;
+        rdfs:domain [ rdf:type owl:Restriction ;
+                      owl:onProperty :hasGoF ;
+                      owl:someValuesFrom :Patient
+                    ] ;
+        rdfs:range [ rdf:type owl:Restriction ;
+                     owl:onProperty :hasGoF ;
+                     owl:someValuesFrom <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene>
+                   ] .
 
 
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/hasLoF
 :hasLoF rdf:type owl:ObjectProperty ;
-        rdfs:subPropertyOf :Patient .
+        rdfs:subPropertyOf :hasMutation ,
+                           owl:topObjectProperty ;
+        rdfs:domain [ rdf:type owl:Restriction ;
+                      owl:onProperty :hasLoF ;
+                      owl:someValuesFrom :Patient
+                    ] ;
+        rdfs:range [ rdf:type owl:Restriction ;
+                     owl:onProperty :hasLoF ;
+                     owl:someValuesFrom <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene>
+                   ] .
 
 
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/hasMutation
 :hasMutation rdf:type owl:ObjectProperty ;
-             rdfs:subPropertyOf :Gene ,
-                                :Patient .
+             rdfs:subPropertyOf owl:topObjectProperty ;
+             rdfs:domain [ rdf:type owl:Restriction ;
+                           owl:onProperty :hasMutation ;
+                           owl:someValuesFrom :Patient
+                         ] .
 
 
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/hasUpregulatedPathway
 :hasUpregulatedPathway rdf:type owl:ObjectProperty ;
-                       rdfs:subPropertyOf :Patient .
+                       rdfs:subPropertyOf owl:topObjectProperty ;
+                       rdfs:domain [ rdf:type owl:Restriction ;
+                                     owl:onProperty :hasUpregulatedPathway ;
+                                     owl:someValuesFrom :Patient
+                                   ] ;
+                       rdfs:range [ rdf:type owl:Restriction ;
+                                    owl:onProperty :hasUpregulatedPathway ;
+                                    owl:someValuesFrom <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>
+                                  ] .
 
 
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/upregulatesPathway
 :upregulatesPathway rdf:type owl:ObjectProperty ;
-                    rdfs:subPropertyOf :Mutation .
+                    rdfs:subPropertyOf owl:topObjectProperty ;
+                    rdfs:domain [ rdf:type owl:Restriction ;
+                                  owl:onProperty :upregulatesPathway ;
+                                  owl:someValuesFrom <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>
+                                ] ;
+                    rdfs:range [ rdf:type owl:Restriction ;
+                                 owl:onProperty :upregulatesPathway ;
+                                 owl:someValuesFrom <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>
+                               ] .
 
 
 #################################################################
 #    Classes
 #################################################################
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Constitutive_Signaling_by_AKT1_E17K_in_Cancer
-:Constitutive_Signaling_by_AKT1_E17K_in_Cancer rdf:type owl:Class ;
-                                               rdfs:subClassOf :ER-related_pathway .
-
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer
-:Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer rdf:type owl:Class ;
-                                                   rdfs:subClassOf :ER-related_pathway .
-
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Defective_translocation_of_RB1_mutants_to_the_nucleus
-:Defective_translocation_of_RB1_mutants_to_the_nucleus rdf:type owl:Class ;
-                                                       rdfs:subClassOf :ER-related_pathway .
-
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability
-:Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability rdf:type owl:Class ;
-                                                                           rdfs:subClassOf :ER-related_pathway .
-
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#PTEN_Loss_of_Function_in_Cancer
-:PTEN_Loss_of_Function_in_Cancer rdf:type owl:Class ;
-                                 rdfs:subClassOf :ER-related_pathway .
-
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#SMAD4_MH2_Domain_Mutants_in_Cancer
-:SMAD4_MH2_Domain_Mutants_in_Cancer rdf:type owl:Class ;
-                                    rdfs:subClassOf :ER-related_pathway .
-
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Signaling_by_ERBB2_ECD_mutants
-:Signaling_by_ERBB2_ECD_mutants rdf:type owl:Class ;
-                                rdfs:subClassOf :HER2-related_pathway .
-
-
-###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Signaling_by_ERBB2_KD_Mutants
-:Signaling_by_ERBB2_KD_Mutants rdf:type owl:Class ;
-                               rdfs:subClassOf :HER2-related_pathway .
-
 
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Signaling_by_ERBB2_TMD/JMD_mutants
 <http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA#Signaling_by_ERBB2_TMD/JMD_mutants> rdf:type owl:Class ;
@@ -195,6 +205,21 @@
        rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#BreastCancerSubType> .
 
 
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Constitutive_Signaling_by_AKT1_E17K_in_Cancer
+:Constitutive_Signaling_by_AKT1_E17K_in_Cancer rdf:type owl:Class ;
+                                               rdfs:subClassOf :ER-related_pathway .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer
+:Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer rdf:type owl:Class ;
+                                                   rdfs:subClassOf :ER-related_pathway .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Defective_translocation_of_RB1_mutants_to_the_nucleus
+:Defective_translocation_of_RB1_mutants_to_the_nucleus rdf:type owl:Class ;
+                                                       rdfs:subClassOf :ER-related_pathway .
+
+
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/ER
 :ER rdf:type owl:Class ;
     rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
@@ -207,6 +232,7 @@
 
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/ERBB2
 :ERBB2 rdf:type owl:Class ;
+       owl:equivalentClass :HER2 ;
        rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
 
 
@@ -278,6 +304,11 @@
                        rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> .
 
 
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability
+:Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability rdf:type owl:Class ;
+                                                                           rdfs:subClassOf :ER-related_pathway .
+
+
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/LumA
 :LumA rdf:type owl:Class ;
       owl:equivalentClass [ owl:intersectionOf ( :Patient
@@ -311,6 +342,12 @@
                                                                                                              owl:someValuesFrom :HER2-related_pathway
                                                                                                            ]
                                                                                         ]
+                                                                                        [ rdf:type owl:Class ;
+                                                                                          owl:complementOf [ rdf:type owl:Restriction ;
+                                                                                                             owl:onProperty :hasUpregulatedPathway ;
+                                                                                                             owl:someValuesFrom :PR-related_pathway
+                                                                                                           ]
+                                                                                        ]
                                                                                         [ rdf:type owl:Restriction ;
                                                                                           owl:onProperty :hasUpregulatedPathway ;
                                                                                           owl:someValuesFrom :Ki-67-related_pathway
@@ -324,12 +361,6 @@
                                                                  ]
                                                                )
                                                  ]
-                                                 [ rdf:type owl:Class ;
-                                                   owl:complementOf [ rdf:type owl:Restriction ;
-                                                                      owl:onProperty :hasUpregulatedPathway ;
-                                                                      owl:someValuesFrom :PR-related_pathway
-                                                                    ]
-                                                 ]
                                                  [ rdf:type owl:Restriction ;
                                                    owl:onProperty :hasUpregulatedPathway ;
                                                    owl:someValuesFrom :ER-related_pathway
@@ -338,6 +369,11 @@
                             rdf:type owl:Class
                           ] ;
       rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#BreastCancerSubType> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Mutation_Effect
+:Mutation_Effect rdf:type owl:Class ;
+                 rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
 
 
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Normal
@@ -368,8 +404,28 @@
                     rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> .
 
 
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/PTEN_Loss_of_Function_in_Cancer
+:PTEN_Loss_of_Function_in_Cancer rdf:type owl:Class ;
+                                 rdfs:subClassOf :ER-related_pathway .
+
+
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Patient
 :Patient rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/SMAD4_MH2_Domain_Mutants_in_Cancer
+:SMAD4_MH2_Domain_Mutants_in_Cancer rdf:type owl:Class ;
+                                    rdfs:subClassOf :ER-related_pathway .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Signaling_by_ERBB2_ECD_mutants
+:Signaling_by_ERBB2_ECD_mutants rdf:type owl:Class ;
+                                rdfs:subClassOf :HER2-related_pathway .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Signaling_by_ERBB2_KD_Mutants
+:Signaling_by_ERBB2_KD_Mutants rdf:type owl:Class ;
+                               rdfs:subClassOf :HER2-related_pathway .
 
 
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/TP53
@@ -383,17 +439,38 @@
 
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/GoF
 :GoF rdf:type owl:NamedIndividual ,
-              <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+              <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> ,
+              :Mutation_Effect .
 
 
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/LoF
 :LoF rdf:type owl:NamedIndividual ,
-              <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+              <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> ,
+              :Mutation_Effect .
 
 
 ###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Others
 :Others rdf:type owl:NamedIndividual ,
                  <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
+
+
+###  http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/Partial_LoF
+:Partial_LoF rdf:type owl:NamedIndividual ,
+                      :Mutation_Effect .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Basal
+                :Her2
+                :LumA
+                :LumB
+                :Normal
+              )
+] .
 
 
 #################################################################
@@ -407,76 +484,6 @@
 :m rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
 
 :p rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
-
-[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
-   rdfs:comment "" ;
-   rdfs:label "S2" ;
-   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
-   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
-                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Patient ;
-                                                       <http://www.w3.org/2003/11/swrl#argument1> :pt
-                                                     ] ;
-                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
-                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasMutation ;
-                                                                  <http://www.w3.org/2003/11/swrl#argument1> :pt ;
-                                                                  <http://www.w3.org/2003/11/swrl#argument2> :m
-                                                                ] ;
-                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
-                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :downregulatesPathway ;
-                                                                             <http://www.w3.org/2003/11/swrl#argument1> :m ;
-                                                                             <http://www.w3.org/2003/11/swrl#argument2> :p
-                                                                           ] ;
-                                                                 rdf:rest rdf:nil
-                                                               ]
-                                                    ]
-                                         ] ;
-   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
-                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasDownregulatedPathway ;
-                                                       <http://www.w3.org/2003/11/swrl#argument1> :pt ;
-                                                       <http://www.w3.org/2003/11/swrl#argument2> :p
-                                                     ] ;
-                                           rdf:rest rdf:nil
-                                         ]
- ] .
-
-[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
-   rdfs:comment "" ;
-   rdfs:label "S1" ;
-   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
-   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
-                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Patient ;
-                                                       <http://www.w3.org/2003/11/swrl#argument1> :pt
-                                                     ] ;
-                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
-                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasMutation ;
-                                                                  <http://www.w3.org/2003/11/swrl#argument1> :pt ;
-                                                                  <http://www.w3.org/2003/11/swrl#argument2> :m
-                                                                ] ;
-                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
-                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :upregulatesPathway ;
-                                                                             <http://www.w3.org/2003/11/swrl#argument1> :m ;
-                                                                             <http://www.w3.org/2003/11/swrl#argument2> :p
-                                                                           ] ;
-                                                                 rdf:rest rdf:nil
-                                                               ]
-                                                    ]
-                                         ] ;
-   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
-                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasUpregulatedPathway ;
-                                                       <http://www.w3.org/2003/11/swrl#argument1> :pt ;
-                                                       <http://www.w3.org/2003/11/swrl#argument2> :p
-                                                     ] ;
-                                           rdf:rest rdf:nil
-                                         ]
- ] .
 
 [ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
    rdfs:comment "" ;
@@ -569,6 +576,124 @@
                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLoF ;
                                                        <http://www.w3.org/2003/11/swrl#argument1> :pt ;
                                                        <http://www.w3.org/2003/11/swrl#argument2> :g
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S5" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Patient ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :pt
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#classPredicate> <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> :g
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasMutation ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> :pt ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> :m
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasMutation ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> :g ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> :m
+                                                                                      ] ;
+                                                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasEffect ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument1> :m ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> :Partial_LoF
+                                                                                                 ] ;
+                                                                                       rdf:rest rdf:nil
+                                                                                     ]
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLoF ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :pt ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :g
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S2" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Patient ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :pt
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasMutation ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> :pt ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> :m
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :downregulatesPathway ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> :m ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> :p
+                                                                           ] ;
+                                                                 rdf:rest rdf:nil
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasDownregulatedPathway ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :pt ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :p
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S1" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Patient ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :pt
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasMutation ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> :pt ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> :m
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :upregulatesPathway ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> :m ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> :p
+                                                                           ] ;
+                                                                 rdf:rest rdf:nil
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasUpregulatedPathway ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :pt ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :p
                                                      ] ;
                                            rdf:rest rdf:nil
                                          ]
