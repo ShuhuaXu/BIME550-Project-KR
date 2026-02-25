@@ -1,0 +1,38 @@
+Gene,Mutation,Pathway,Effect,Chromosome,Start_Position
+PIK3CA,p.E542K,Constitutive Signaling by Aberrant PI3K in Cancer,gain_of_function,3,178936082
+ERBB2,p.V777L,Signaling by ERBB2 KD Mutants,gain_of_function,17,37881000
+PIK3CA,p.H1047L,Constitutive Signaling by Aberrant PI3K in Cancer,gain_of_function,3,178952085
+RB1,p.S829*,Defective translocation of RB1 mutants to the nucleus,loss_of_function|partial_loss_of_function,13,49039501
+PIK3CA,p.H1047R,Constitutive Signaling by Aberrant PI3K in Cancer,gain_of_function,3,178952085
+PIK3CA,p.H1047Y,Constitutive Signaling by Aberrant PI3K in Cancer,gain_of_function,3,178952084
+PIK3CA,p.Q546R,Constitutive Signaling by Aberrant PI3K in Cancer,gain_of_function,3,178936095
+PIK3CA,p.E545K,Constitutive Signaling by Aberrant PI3K in Cancer,gain_of_function,3,178936091
+ERBB2,p.R678Q,Signaling by ERBB2 TMD/JMD mutants,gain_of_function,17,37879658
+ERBB2,p.L755M,Signaling by ERBB2 KD Mutants,gain_of_function,17,37880219
+ERBB2,p.L755W,Signaling by ERBB2 KD Mutants,gain_of_function,17,37880220
+PIK3CA,p.M1043I,Constitutive Signaling by Aberrant PI3K in Cancer,gain_of_function,3,178952074
+ERBB2,p.S310F,Signaling by ERBB2 ECD mutants,gain_of_function,17,37868208
+PIK3CA,p.E545A,Constitutive Signaling by Aberrant PI3K in Cancer,gain_of_function,3,178936092
+ERBB2,p.G309A,Signaling by ERBB2 ECD mutants,gain_of_function,17,37868205
+ERBB2,p.V842I,Signaling by ERBB2 KD Mutants,gain_of_function,17,37881332
+AKT1,p.E17K,Constitutive Signaling by AKT1 E17K in Cancer,gain_of_function,14,105246551
+ERBB2,p.L755S,Signaling by ERBB2 KD Mutants,gain_of_function,17,37880220
+PIK3CA,p.E545G,Constitutive Signaling by Aberrant PI3K in Cancer,gain_of_function,3,178936092
+TP53,p.R342P,Loss of function of TP53 in cancer due to loss of tetramerization ability,loss_of_function|partial_loss_of_function,17,7574002
+PTEN,p.S59*,PTEN Loss of Function in Cancer,loss_of_function,10,89685281
+PTEN,p.R130Q,PTEN Loss of Function in Cancer,loss_of_function,10,89692905
+RB1,p.R552*,Defective translocation of RB1 mutants to the nucleus,loss_of_function|partial_loss_of_function,13,48955538
+PIK3CA,p.Q546K,Constitutive Signaling by Aberrant PI3K in Cancer,gain_of_function,3,178936094
+PTEN,p.Y88*,PTEN Loss of Function in Cancer,loss_of_function,10,89692780
+RB1,p.S215*,Defective translocation of RB1 mutants to the nucleus,loss_of_function|partial_loss_of_function,13,48934189
+RB1,p.A74Efs*4,Defective translocation of RB1 mutants to the nucleus,loss_of_function|partial_loss_of_function,13,48881488
+PTEN,p.R130P,PTEN Loss of Function in Cancer,loss_of_function,10,89692905
+ERBB2,p.D769Y,Signaling by ERBB2 KD Mutants,gain_of_function,17,37880261
+PTEN,p.S287*,PTEN Loss of Function in Cancer,loss_of_function,10,89720709
+ERBB2,p.D769H,Signaling by ERBB2 KD Mutants,gain_of_function,17,37880261
+SMAD4,p.Q245*,SMAD4 MH2 Domain Mutants in Cancer,loss_of_function,18,48584560
+SMAD4,p.E526*,SMAD4 MH2 Domain Mutants in Cancer,loss_of_function,18,48604754
+ERBB2,p.I767M,Signaling by ERBB2 KD Mutants,gain_of_function,17,37880257
+RB1,p.R455*,Defective translocation of RB1 mutants to the nucleus,loss_of_function|partial_loss_of_function,13,48953760
+SMAD4,p.Q334*,SMAD4 MH2 Domain Mutants in Cancer,loss_of_function,18,48591837
+PTEN,p.Q149*,PTEN Loss of Function in Cancer,loss_of_function,10,89692961
