@@ -2,13 +2,15 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix swrl: <http://www.w3.org/2003/11/swrl#> .
-@prefix swrla: <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-
-swrla:isRuleEnabled a owl:AnnotationProperty .
 
 <http://www.semanticweb.org/kevinlee/ontologies/2026/1/BIME550BRCA> a owl:Ontology .
+
+:Normal a owl:Class ;
+    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#BreastCancerSubType> ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( :Patient [ a owl:Class ;
+                        owl:complementOf [ a owl:Class ;
+                                owl:unionOf ( :Basal :Her2 :LumA :LumB ) ] ] ) ] .
 
 :Others a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual .
@@ -40,106 +42,27 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
     rdfs:label "Demo Patient - Expected Normal" ;
     :hasMutation :PTEN_p.R130Q .
 
-:S1 a swrl:Imp ;
-    swrla:isRuleEnabled true ;
-    swrl:body ( [ a swrl:ClassAtom ;
-                swrl:argument1 :pt ;
-                swrl:classPredicate :Patient ] [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 :pt ;
-                swrl:argument2 :m ;
-                swrl:propertyPredicate :hasMutation ] [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 :m ;
-                swrl:argument2 :p ;
-                swrl:propertyPredicate :upregulatesPathway ] ) ;
-    swrl:head ( [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 :pt ;
-                swrl:argument2 :p ;
-                swrl:propertyPredicate :hasUpregulatedPathway ] ) .
+:hasDownregulatedPathway a owl:ObjectProperty ;
+    rdfs:domain :Patient ;
+    rdfs:range <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> ;
+    rdfs:subPropertyOf owl:topObjectProperty ;
+    owl:propertyChainAxiom ( :hasMutation :downregulatesPathway ) .
 
-:S2 a swrl:Imp ;
-    swrla:isRuleEnabled true ;
-    swrl:body ( [ a swrl:ClassAtom ;
-                swrl:argument1 :pt ;
-                swrl:classPredicate :Patient ] [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 :pt ;
-                swrl:argument2 :m ;
-                swrl:propertyPredicate :hasMutation ] [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 :m ;
-                swrl:argument2 :p ;
-                swrl:propertyPredicate :downregulatesPathway ] ) ;
-    swrl:head ( [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 :pt ;
-                swrl:argument2 :p ;
-                swrl:propertyPredicate :hasDownregulatedPathway ] ) .
+:hasEffect a owl:ObjectProperty ;
+    rdfs:domain <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> ;
+    rdfs:range :Mutation_Effect ;
+    rdfs:subPropertyOf owl:topObjectProperty .
 
-:S3 a swrl:Imp ;
-    swrla:isRuleEnabled true ;
-    swrl:body ( [ a swrl:ClassAtom ;
-                swrl:argument1 :pt ;
-                swrl:classPredicate :Patient ] [ a swrl:ClassAtom ;
-                swrl:argument1 :g ;
-                swrl:classPredicate <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> ] [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 :pt ;
-                swrl:argument2 :m ;
-                swrl:propertyPredicate :hasMutation ] [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 :g ;
-                swrl:argument2 :m ;
-                swrl:propertyPredicate :hasMutation ] [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 :m ;
-                swrl:argument2 :LoF ;
-                swrl:propertyPredicate :hasEffect ] ) ;
-    swrl:head ( [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 :pt ;
-                swrl:argument2 :g ;
-                swrl:propertyPredicate :hasLoF ] ) .
-
-:S4 a swrl:Imp ;
-    swrla:isRuleEnabled true ;
-    swrl:body ( [ a swrl:ClassAtom ;
-                swrl:argument1 :pt ;
-                swrl:classPredicate :Patient ] [ a swrl:ClassAtom ;
-                swrl:argument1 :g ;
-                swrl:classPredicate <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> ] [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 :pt ;
-                swrl:argument2 :m ;
-                swrl:propertyPredicate :hasMutation ] [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 :g ;
-                swrl:argument2 :m ;
-                swrl:propertyPredicate :hasMutation ] [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 :m ;
-                swrl:argument2 :GoF ;
-                swrl:propertyPredicate :hasEffect ] ) ;
-    swrl:head ( [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 :pt ;
-                swrl:argument2 :g ;
-                swrl:propertyPredicate :hasGoF ] ) .
-
-:S5 a swrl:Imp ;
-    swrla:isRuleEnabled true ;
-    swrl:body ( [ a swrl:ClassAtom ;
-                swrl:argument1 :pt ;
-                swrl:classPredicate :Patient ] [ a swrl:ClassAtom ;
-                swrl:argument1 :g ;
-                swrl:classPredicate <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> ] [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 :pt ;
-                swrl:argument2 :m ;
-                swrl:propertyPredicate :hasMutation ] [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 :g ;
-                swrl:argument2 :m ;
-                swrl:propertyPredicate :hasMutation ] [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 :m ;
-                swrl:argument2 :Partial_LoF ;
-                swrl:propertyPredicate :hasEffect ] ) ;
-    swrl:head ( [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 :pt ;
-                swrl:argument2 :g ;
-                swrl:propertyPredicate :hasLoF ] ) .
+:hasGoF a owl:ObjectProperty ;
+    rdfs:domain :Patient ;
+    rdfs:range <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> ;
+    owl:propertyChainAxiom ( :hasMutation :isGoFMutationOf ) .
 
 :AKT1 a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene>,
         :AKT1,
         owl:Class,
         owl:NamedIndividual ;
-    :hasMutation :AKT1_p.E17K ;
+    :hasGoFMutation :AKT1_p.E17K ;
     rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
 
 :AKT1_p.E17K a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
@@ -148,11 +71,29 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
     :hasEffect :GoF ;
     :upregulatesPathway :Constitutive_Signaling_by_AKT1_E17K_in_Cancer .
 
+:BRCA2 a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene>,
+        :BRCA2,
+        owl:Class,
+        owl:NamedIndividual ;
+    :hasLoFMutation :BRCA2_p.Y3308Ter ;
+    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
+
 :BRCA2_p.Y3308Ter a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "BRCA2 p.Y3308*" ;
     :downregulatesPathway :Defective_Homologous_Recombination_Repair ;
     :hasEffect :LoF .
+
+:Basal a owl:Class ;
+    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#BreastCancerSubType> ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( :Patient [ a owl:Restriction ;
+                        owl:onProperty :hasLoF ;
+                        owl:someValuesFrom :BRCA1 ] [ a owl:Restriction ;
+                        owl:onProperty :hasLoF ;
+                        owl:someValuesFrom :TP53 ] [ a owl:Restriction ;
+                        owl:onProperty :hasUpregulatedPathway ;
+                        owl:someValuesFrom :Ki-67-related_pathway ] ) ] .
 
 :Cell_Proliferation_due_to_TP53_Loss a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>,
         :Ki-67-related_pathway,
@@ -178,7 +119,7 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
         owl:Class,
         owl:NamedIndividual ;
     rdfs:label "ERBB2 (HER2)" ;
-    :hasMutation :ERBB2_p.D769H,
+    :hasGoFMutation :ERBB2_p.D769H,
         :ERBB2_p.D769Y,
         :ERBB2_p.G309A,
         :ERBB2_p.I767M,
@@ -245,6 +186,13 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
     :hasEffect :GoF ;
     :upregulatesPathway :Signaling_by_ERBB2_KD_Mutants .
 
+:Her2 a owl:Class ;
+    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#BreastCancerSubType> ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( :Patient [ a owl:Restriction ;
+                        owl:onProperty :hasUpregulatedPathway ;
+                        owl:someValuesFrom :HER2-related_pathway ] ) ] .
+
 :Ki-67 a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene>,
         :Ki-67,
         owl:Class,
@@ -256,18 +204,32 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
         owl:NamedIndividual ;
     rdfs:label "Loss of function of TP53 in cancer due to loss of tetramerization ability" .
 
-:Normal a owl:Class ;
+:LumA a owl:Class ;
     rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#BreastCancerSubType> ;
     owl:equivalentClass [ a owl:Class ;
-            owl:intersectionOf ( :Patient [ a owl:Class ;
-                        owl:complementOf [ a owl:Class ;
-                                owl:unionOf ( :Basal :Her2 :LumA :LumB ) ] ] ) ] .
+            owl:intersectionOf ( :Patient [ a owl:Restriction ;
+                        owl:onProperty :hasUpregulatedPathway ;
+                        owl:someValuesFrom :ER-related_pathway ] [ a owl:Restriction ;
+                        owl:onProperty :hasUpregulatedPathway ;
+                        owl:someValuesFrom :PR-related_pathway ] ) ] .
+
+:LumB a owl:Class ;
+    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#BreastCancerSubType> ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( :Patient [ a owl:Restriction ;
+                        owl:onProperty :hasUpregulatedPathway ;
+                        owl:someValuesFrom :ER-related_pathway ] [ a owl:Class ;
+                        owl:unionOf ( [ a owl:Restriction ;
+                                    owl:onProperty :hasUpregulatedPathway ;
+                                    owl:someValuesFrom :HER2-related_pathway ] [ a owl:Restriction ;
+                                    owl:onProperty :hasUpregulatedPathway ;
+                                    owl:someValuesFrom :Ki-67-related_pathway ] ) ] ) ] .
 
 :PIK3CA a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene>,
         :PIK3CA,
         owl:Class,
         owl:NamedIndividual ;
-    :hasMutation :PIK3CA_p.E542K,
+    :hasGoFMutation :PIK3CA_p.E542K,
         :PIK3CA_p.E545A,
         :PIK3CA_p.E545G,
         :PIK3CA_p.E545K,
@@ -337,7 +299,7 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
         :PTEN,
         owl:Class,
         owl:NamedIndividual ;
-    :hasMutation :PTEN_p.Q149_,
+    :hasLoFMutation :PTEN_p.Q149_,
         :PTEN_p.R130P,
         :PTEN_p.R130Q,
         :PTEN_p.S287_,
@@ -379,7 +341,7 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
         :RB1,
         owl:Class,
         owl:NamedIndividual ;
-    :hasMutation :RB1_p.A74Efs_4,
+    :hasLoFMutation :RB1_p.A74Efs_4,
         :RB1_p.R455_,
         :RB1_p.R552_,
         :RB1_p.S215_,
@@ -425,7 +387,7 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
         :SMAD4,
         owl:Class,
         owl:NamedIndividual ;
-    :hasMutation :SMAD4_p.E526_,
+    :hasLoFMutation :SMAD4_p.E526_,
         :SMAD4_p.Q245_,
         :SMAD4_p.Q334_ ;
     rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
@@ -453,11 +415,33 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
         owl:NamedIndividual ;
     rdfs:label "Signaling by ERBB2 TMD/JMD mutants" .
 
+:downregulatesPathway a owl:ObjectProperty ;
+    rdfs:domain <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> ;
+    rdfs:range <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> ;
+    rdfs:subPropertyOf owl:topObjectProperty .
+
+:hasGoFMutation a owl:ObjectProperty ;
+    rdfs:subPropertyOf :hasMutation .
+
+:hasLoFMutation a owl:ObjectProperty ;
+    rdfs:subPropertyOf :hasMutation .
+
+:isGoFMutationOf a owl:ObjectProperty ;
+    owl:inverseOf :hasGoFMutation .
+
+:isLoFMutationOf a owl:ObjectProperty ;
+    owl:inverseOf :hasLoFMutation .
+
+:upregulatesPathway a owl:ObjectProperty ;
+    rdfs:domain <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> ;
+    rdfs:range <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> ;
+    rdfs:subPropertyOf owl:topObjectProperty .
+
 :BRCA1 a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene>,
         :BRCA1,
         owl:Class,
         owl:NamedIndividual ;
-    :hasMutation :BRCA1_p.C61G ;
+    :hasLoFMutation :BRCA1_p.C61G ;
     rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
 
 :BRCA1_p.C61G a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
@@ -465,36 +449,6 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
     rdfs:label "BRCA1 p.C61G" ;
     :downregulatesPathway :Defective_Homologous_Recombination_Repair ;
     :hasEffect :LoF .
-
-:BRCA2 a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene>,
-        :BRCA2,
-        owl:Class,
-        owl:NamedIndividual ;
-    :hasMutation :BRCA2_p.Y3308Ter ;
-    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
-
-:Basal a owl:Class ;
-    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#BreastCancerSubType> ;
-    owl:equivalentClass [ a owl:Class ;
-            owl:intersectionOf ( :Patient [ a owl:Class ;
-                        owl:unionOf ( [ a owl:Restriction ;
-                                    owl:onProperty :hasLoF ;
-                                    owl:someValuesFrom :BRCA1 ] [ a owl:Restriction ;
-                                    owl:onProperty :hasLoF ;
-                                    owl:someValuesFrom :BRCA2 ] ) ] [ a owl:Class ;
-                        owl:complementOf [ a owl:Restriction ;
-                                owl:onProperty :hasUpregulatedPathway ;
-                                owl:someValuesFrom :ER-related_pathway ] ] [ a owl:Class ;
-                        owl:complementOf [ a owl:Restriction ;
-                                owl:onProperty :hasUpregulatedPathway ;
-                                owl:someValuesFrom :HER2-related_pathway ] ] [ a owl:Class ;
-                        owl:complementOf [ a owl:Restriction ;
-                                owl:onProperty :hasUpregulatedPathway ;
-                                owl:someValuesFrom :PR-related_pathway ] ] [ a owl:Restriction ;
-                        owl:onProperty :hasLoF ;
-                        owl:someValuesFrom :TP53 ] [ a owl:Restriction ;
-                        owl:onProperty :hasUpregulatedPathway ;
-                        owl:someValuesFrom :Ki-67-related_pathway ] ) ] .
 
 :Defective_Homologous_Recombination_Repair a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>,
         :DNA_Repair_Pathway,
@@ -513,60 +467,6 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
     :hasEffect :GoF ;
     :upregulatesPathway :Signaling_by_ERBB2_KD_Mutants .
 
-:Her2 a owl:Class ;
-    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#BreastCancerSubType> ;
-    owl:equivalentClass [ a owl:Class ;
-            owl:intersectionOf ( :Patient [ a owl:Class ;
-                        owl:unionOf ( [ a owl:Class ;
-                                    owl:intersectionOf ( [ a owl:Class ;
-                                                owl:complementOf [ a owl:Restriction ;
-                                                        owl:onProperty :hasUpregulatedPathway ;
-                                                        owl:someValuesFrom :ER-related_pathway ] ] [ a owl:Class ;
-                                                owl:complementOf [ a owl:Restriction ;
-                                                        owl:onProperty :hasUpregulatedPathway ;
-                                                        owl:someValuesFrom :PR-related_pathway ] ] [ a owl:Restriction ;
-                                                owl:onProperty :hasUpregulatedPathway ;
-                                                owl:someValuesFrom :Ki-67-related_pathway ] ) ] [ a owl:Class ;
-                                    owl:intersectionOf ( [ a owl:Class ;
-                                                owl:complementOf [ a owl:Restriction ;
-                                                        owl:onProperty :hasUpregulatedPathway ;
-                                                        owl:someValuesFrom :Ki-67-related_pathway ] ] [ a owl:Restriction ;
-                                                owl:onProperty :hasUpregulatedPathway ;
-                                                owl:someValuesFrom :ER-related_pathway ] ) ] ) ] [ a owl:Restriction ;
-                        owl:onProperty :hasUpregulatedPathway ;
-                        owl:someValuesFrom :HER2-related_pathway ] ) ] .
-
-:LumA a owl:Class ;
-    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#BreastCancerSubType> ;
-    owl:equivalentClass [ a owl:Class ;
-            owl:intersectionOf ( :Patient [ a owl:Class ;
-                        owl:complementOf [ a owl:Restriction ;
-                                owl:onProperty :hasUpregulatedPathway ;
-                                owl:someValuesFrom :Ki-67-related_pathway ] ] [ a owl:Restriction ;
-                        owl:onProperty :hasUpregulatedPathway ;
-                        owl:someValuesFrom :ER-related_pathway ] [ a owl:Restriction ;
-                        owl:onProperty :hasUpregulatedPathway ;
-                        owl:someValuesFrom :PR-related_pathway ] ) ] .
-
-:LumB a owl:Class ;
-    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#BreastCancerSubType> ;
-    owl:equivalentClass [ a owl:Class ;
-            owl:intersectionOf ( :Patient [ a owl:Class ;
-                        owl:unionOf ( [ a owl:Class ;
-                                    owl:intersectionOf ( [ a owl:Class ;
-                                                owl:complementOf [ a owl:Restriction ;
-                                                        owl:onProperty :hasUpregulatedPathway ;
-                                                        owl:someValuesFrom :HER2-related_pathway ] ] [ a owl:Class ;
-                                                owl:complementOf [ a owl:Restriction ;
-                                                        owl:onProperty :hasUpregulatedPathway ;
-                                                        owl:someValuesFrom :PR-related_pathway ] ] [ a owl:Restriction ;
-                                                owl:onProperty :hasUpregulatedPathway ;
-                                                owl:someValuesFrom :Ki-67-related_pathway ] ) ] [ a owl:Restriction ;
-                                    owl:onProperty :hasUpregulatedPathway ;
-                                    owl:someValuesFrom :HER2-related_pathway ] ) ] [ a owl:Restriction ;
-                        owl:onProperty :hasUpregulatedPathway ;
-                        owl:someValuesFrom :ER-related_pathway ] ) ] .
-
 :PIK3CA_p.E545K a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "PIK3CA p.E545K" ;
@@ -579,11 +479,19 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
     :hasEffect :GoF ;
     :upregulatesPathway :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer .
 
+:PR-related_pathway a owl:Class ;
+    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> .
+
 :PTEN_p.R130Q a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "PTEN p.R130Q" ;
     :downregulatesPathway :PTEN_Loss_of_Function_in_Cancer ;
     :hasEffect :LoF .
+
+:PathwayCategory a owl:Class ;
+    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:unionOf ( :ER-related_pathway :PR-related_pathway :HER2-related_pathway :Ki-67-related_pathway ) ] .
 
 :Signaling_by_ERBB2_ECD_mutants a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>,
         :HER2-related_pathway,
@@ -594,7 +502,7 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
         :TP53,
         owl:Class,
         owl:NamedIndividual ;
-    :hasMutation :TP53_p.R342P ;
+    :hasLoFMutation :TP53_p.R342P ;
     rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
 
 :TP53_p.R342P a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
@@ -605,56 +513,21 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
         :Partial_LoF ;
     :upregulatesPathway :Cell_Proliferation_due_to_TP53_Loss .
 
-:hasDownregulatedPathway a owl:ObjectProperty ;
-    rdfs:domain [ a owl:Restriction ;
-            owl:onProperty :hasDownregulatedPathway ;
-            owl:someValuesFrom :Patient ] ;
-    rdfs:range [ a owl:Restriction ;
-            owl:onProperty :hasEffect ;
-            owl:someValuesFrom <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> ] ;
-    rdfs:subPropertyOf owl:topObjectProperty ;
-    owl:propertyChainAxiom ( :hasMutation :downregulatesPathway ) .
+:hasLoF a owl:ObjectProperty ;
+    rdfs:domain :Patient ;
+    rdfs:range <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> ;
+    owl:propertyChainAxiom ( :hasMutation :isLoFMutationOf ) .
 
 :SMAD4_MH2_Domain_Mutants_in_Cancer a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>,
         :ER-related_pathway,
         owl:NamedIndividual ;
     rdfs:label "SMAD4 MH2 Domain Mutants in Cancer" .
 
-:hasGoF a owl:ObjectProperty ;
-    rdfs:domain [ a owl:Restriction ;
-            owl:onProperty :hasGoF ;
-            owl:someValuesFrom :Patient ] ;
-    rdfs:range [ a owl:Restriction ;
-            owl:onProperty :hasGoF ;
-            owl:someValuesFrom <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> ] ;
-    rdfs:subPropertyOf :hasMutation,
-        owl:topObjectProperty .
+:Ki-67-related_pathway a owl:Class ;
+    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> .
 
 :Mutation_Effect a owl:Class ;
     rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
-
-:PR-related_pathway a owl:Class ;
-    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> .
-
-:downregulatesPathway a owl:ObjectProperty ;
-    rdfs:domain [ a owl:Restriction ;
-            owl:onProperty :downregulatesPathway ;
-            owl:someValuesFrom <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> ] ;
-    rdfs:range [ a owl:Restriction ;
-            owl:onProperty :downregulatesPathway ;
-            owl:someValuesFrom <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> ] ;
-    rdfs:subPropertyOf owl:topObjectProperty .
-
-:p a swrl:Variable .
-
-:upregulatesPathway a owl:ObjectProperty ;
-    rdfs:domain [ a owl:Restriction ;
-            owl:onProperty :upregulatesPathway ;
-            owl:someValuesFrom <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> ] ;
-    rdfs:range [ a owl:Restriction ;
-            owl:onProperty :upregulatesPathway ;
-            owl:someValuesFrom <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> ] ;
-    rdfs:subPropertyOf owl:topObjectProperty .
 
 <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#BreastCancerSubType> a owl:Class .
 
@@ -663,7 +536,7 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
         owl:NamedIndividual ;
     rdfs:label "Defective translocation of RB1 mutants to the nucleus" .
 
-:Ki-67-related_pathway a owl:Class ;
+:HER2-related_pathway a owl:Class ;
     rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> .
 
 :PTEN_Loss_of_Function_in_Cancer a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>,
@@ -671,73 +544,42 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
         owl:NamedIndividual ;
     rdfs:label "PTEN Loss of Function in Cancer" .
 
-:hasEffect a owl:ObjectProperty ;
-    rdfs:domain [ a owl:Restriction ;
-            owl:onProperty :hasEffect ;
-            owl:someValuesFrom <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> ] ;
-    rdfs:range [ a owl:Restriction ;
-            owl:onProperty :hasEffect ;
-            owl:someValuesFrom :Mutation_Effect ] ;
-    rdfs:subPropertyOf owl:topObjectProperty .
-
-:HER2-related_pathway a owl:Class ;
-    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> .
-
 :Partial_LoF a :Mutation_Effect,
         owl:NamedIndividual .
 
-:hasLoF a owl:ObjectProperty ;
-    rdfs:domain [ a owl:Restriction ;
-            owl:onProperty :hasLoF ;
-            owl:someValuesFrom :Patient ] ;
-    rdfs:range [ a owl:Restriction ;
-            owl:onProperty :hasLoF ;
-            owl:someValuesFrom <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> ] ;
-    rdfs:subPropertyOf :hasMutation,
-        owl:topObjectProperty .
+:hasMutation a owl:ObjectProperty ;
+    rdfs:domain :Patient ;
+    rdfs:subPropertyOf owl:topObjectProperty .
 
 :Signaling_by_ERBB2_KD_Mutants a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>,
         :HER2-related_pathway,
         owl:NamedIndividual ;
     rdfs:label "Signaling by ERBB2 KD Mutants" .
 
-:g a swrl:Variable .
+:hasUpregulatedPathway a owl:ObjectProperty ;
+    rdfs:domain :Patient ;
+    rdfs:range :PathwayCategory ;
+    rdfs:subPropertyOf owl:topObjectProperty ;
+    owl:propertyChainAxiom ( :hasMutation :upregulatesPathway ) .
+
+:ER-related_pathway a owl:Class ;
+    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> .
 
 :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>,
         :ER-related_pathway,
         owl:NamedIndividual ;
     rdfs:label "Constitutive Signaling by Aberrant PI3K in Cancer" .
 
-:ER-related_pathway a owl:Class ;
-    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> .
-
-:hasMutation a owl:ObjectProperty ;
-    rdfs:domain [ a owl:Restriction ;
-            owl:onProperty :hasMutation ;
-            owl:someValuesFrom :Patient ] ;
-    rdfs:subPropertyOf owl:topObjectProperty .
-
-:m a swrl:Variable .
-
-:pt a swrl:Variable .
+:Patient a owl:Class ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom :PathwayCategory ;
+            owl:onProperty :hasUpregulatedPathway ] .
 
 :LoF a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         :Mutation_Effect,
         owl:NamedIndividual .
 
 <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> a owl:Class .
-
-:Patient a owl:Class .
-
-:hasUpregulatedPathway a owl:ObjectProperty ;
-    rdfs:domain [ a owl:Restriction ;
-            owl:onProperty :hasUpregulatedPathway ;
-            owl:someValuesFrom :Patient ] ;
-    rdfs:range [ a owl:Restriction ;
-            owl:onProperty :hasUpregulatedPathway ;
-            owl:someValuesFrom <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> ] ;
-    rdfs:subPropertyOf owl:topObjectProperty ;
-    owl:propertyChainAxiom ( :hasMutation :upregulatesPathway ) .
 
 :GoF a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         :Mutation_Effect,
@@ -746,7 +588,4 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
 <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> a owl:Class .
 
 <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> a owl:Class .
-
-[] a owl:AllDisjointClasses ;
-    owl:members ( :Basal :Her2 :LumA :LumB :Normal ) .
 
