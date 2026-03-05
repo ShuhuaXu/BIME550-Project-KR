@@ -15,6 +15,8 @@ import re
 # ── Namespaces ──────────────────────────────────────────────────────────────
 BASE = Namespace("http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/")
 GENE_NS = Namespace("http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#")
+SWRL_NS = Namespace("http://www.w3.org/2003/11/swrl#")
+SWRLA = Namespace("http://swrl.stanford.edu/ontologies/3.3/swrla.owl#")
 
 
 def clean_uri_string(s):
@@ -67,6 +69,39 @@ def owl_intersection(g, classes):
     return i
 
 
+# ── SWRL Helper Functions ─────────────────────────────────────────────
+
+def swrl_class_atom(g, cls, var):
+    atom = BNode()
+    g.add((atom, RDF.type, SWRL_NS.ClassAtom))
+    g.add((atom, SWRL_NS.classPredicate, cls))
+    g.add((atom, SWRL_NS.argument1, var))
+    return atom
+
+
+def swrl_property_atom(g, prop, arg1, arg2):
+    atom = BNode()
+    g.add((atom, RDF.type, SWRL_NS.IndividualPropertyAtom))
+    g.add((atom, SWRL_NS.propertyPredicate, prop))
+    g.add((atom, SWRL_NS.argument1, arg1))
+    g.add((atom, SWRL_NS.argument2, arg2))
+    return atom
+
+
+def swrl_rule(g, name, body_atoms, head_atoms):
+    rule = BASE[name]
+
+    g.add((rule, RDF.type, SWRL_NS.Imp))
+
+    body_node = BNode()
+    Collection(g, body_node, body_atoms)
+    g.add((rule, SWRL_NS.body, body_node))
+
+    head_node = BNode()
+    Collection(g, head_node, head_atoms)
+    g.add((rule, SWRL_NS.head, head_node))
+
+    g.add((rule, SWRLA.isRuleEnabled, Literal(True)))
 
 # ── Main Ontology Builder ─────────────────────────────────────────────────
 
@@ -112,7 +147,7 @@ def create_ontology(input_csv, output_ttl):
     g.add((downregulates_pathway, RDFS.subPropertyOf, OWL.topObjectProperty))
     g.add((downregulates_pathway, RDFS.domain, owl_some(g, downregulates_pathway, mutation_class)))
     g.add((downregulates_pathway, RDFS.range, owl_some(g, downregulates_pathway, pathway_class)))
-    g.add((downregulates_pathway, OWL.propertyDisjointWith, BASE.upregulatesPathway))
+    # g.add((downregulates_pathway, OWL.propertyDisjointWith, BASE.upregulatesPathway))
 
     upregulates_pathway = BASE.upregulatesPathway
     g.add((upregulates_pathway, RDF.type, OWL.ObjectProperty))
@@ -125,7 +160,7 @@ def create_ontology(input_csv, output_ttl):
     g.add((has_downregulated_pathway, RDFS.subPropertyOf, OWL.topObjectProperty))
     g.add((has_downregulated_pathway, RDFS.domain, owl_some(g, has_downregulated_pathway, patient_class)))
     g.add((has_downregulated_pathway, RDFS.range, owl_some(g, BASE.hasEffect, pathway_class)))
-    g.add((has_downregulated_pathway, OWL.propertyDisjointWith, BASE.hasUpregulatedPathway))
+    # g.add((has_downregulated_pathway, OWL.propertyDisjointWith, BASE.hasUpregulatedPathway))
 
     has_upregulated_pathway = BASE.hasUpregulatedPathway
     g.add((has_upregulated_pathway, RDF.type, OWL.ObjectProperty))
@@ -260,20 +295,27 @@ def create_ontology(input_csv, output_ttl):
 
     for pathway_name, parent_class in pathway_to_parent.items():
         pathway_uri = BASE[clean_uri_string(pathway_name)]
-        g.add((pathway_uri, RDF.type, OWL.Class))
-        g.add((pathway_uri, RDFS.subClassOf, parent_class))
+        # Make it an INDIVIDUAL, not a class
+        g.add((pathway_uri, RDF.type, OWL.NamedIndividual))
+        # Type it as a Pathway instance
+        g.add((pathway_uri, RDF.type, pathway_class))
+        # Type it into the parent pathway category class (ER/HER2/PR/Ki67/etc.)
+        g.add((pathway_uri, RDF.type, parent_class))
+        g.add((pathway_uri, RDFS.label, Literal(pathway_name)))
 
     # Additional pathways for reasoning demo
     # TP53 LoF → uncontrolled proliferation (Ki-67 high) — biologically accurate
     tp53_proliferation = BASE['Cell_Proliferation_due_to_TP53_Loss']
-    g.add((tp53_proliferation, RDF.type, OWL.Class))
-    g.add((tp53_proliferation, RDFS.subClassOf, ki67_related))
+    g.add((tp53_proliferation, RDF.type, OWL.NamedIndividual))
+    g.add((tp53_proliferation, RDF.type, pathway_class))
+    g.add((tp53_proliferation, RDF.type, ki67_related))  # <- critical typing
     g.add((tp53_proliferation, RDFS.label, Literal("Cell Proliferation due to TP53 Loss")))
 
     # BRCA1/BRCA2 LoF → defective homologous recombination
     brca_hr_pathway = BASE['Defective_Homologous_Recombination_Repair']
-    g.add((brca_hr_pathway, RDF.type, OWL.Class))
-    g.add((brca_hr_pathway, RDFS.subClassOf, dna_repair_pathway))
+    g.add((brca_hr_pathway, RDF.type, OWL.NamedIndividual))
+    g.add((brca_hr_pathway, RDF.type, pathway_class))
+    g.add((brca_hr_pathway, RDF.type, dna_repair_pathway))
     g.add((brca_hr_pathway, RDFS.label, Literal("Defective Homologous Recombination Repair")))
 
     # ── Breast Cancer Subtypes ─────────────────────────────────────────────
