@@ -13,7 +13,18 @@
                                 owl:unionOf ( :Basal :Her2 :LumA :LumB ) ] ] ) ] .
 
 :Others a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
-        owl:NamedIndividual .
+        owl:NamedIndividual ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants .
 
 :Patient_Basal_Demo a :Patient,
         owl:NamedIndividual ;
@@ -69,6 +80,16 @@
         owl:NamedIndividual ;
     rdfs:label "AKT1 p.E17K" ;
     :hasEffect :GoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants ;
     :upregulatesPathway :Constitutive_Signaling_by_AKT1_E17K_in_Cancer .
 
 :BRCA2 a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene>,
@@ -82,7 +103,17 @@
         owl:NamedIndividual ;
     rdfs:label "BRCA2 p.Y3308*" ;
     :downregulatesPathway :Defective_Homologous_Recombination_Repair ;
-    :hasEffect :LoF .
+    :hasEffect :LoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants .
 
 :Basal a owl:Class ;
     rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#BreastCancerSubType> ;
@@ -93,17 +124,13 @@
                         owl:onProperty :hasLoF ;
                         owl:someValuesFrom :TP53 ] [ a owl:Restriction ;
                         owl:onProperty :hasUpregulatedPathway ;
-                        owl:someValuesFrom :Ki-67-related_pathway ] ) ] .
-
-:Cell_Proliferation_due_to_TP53_Loss a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>,
-        :Ki-67-related_pathway,
-        owl:NamedIndividual ;
-    rdfs:label "Cell Proliferation due to TP53 Loss" .
-
-:Constitutive_Signaling_by_AKT1_E17K_in_Cancer a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>,
-        :ER-related_pathway,
-        owl:NamedIndividual ;
-    rdfs:label "Constitutive Signaling by AKT1 E17K in Cancer" .
+                        owl:someValuesFrom :Ki-67-related_pathway ] [ a owl:Restriction ;
+                        owl:onProperty :hasNormallyRegulatedPathway ;
+                        owl:someValuesFrom :ER-related_pathway ] [ a owl:Restriction ;
+                        owl:onProperty :hasNormallyRegulatedPathway ;
+                        owl:someValuesFrom :HER2-related_pathway ] [ a owl:Restriction ;
+                        owl:onProperty :hasNormallyRegulatedPathway ;
+                        owl:someValuesFrom :PR-related_pathway ] ) ] .
 
 :DNA_Repair_Pathway a owl:Class ;
     rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> .
@@ -136,54 +163,144 @@
         owl:NamedIndividual ;
     rdfs:label "ERBB2 p.D769H" ;
     :hasEffect :GoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants ;
     :upregulatesPathway :Signaling_by_ERBB2_KD_Mutants .
 
 :ERBB2_p.D769Y a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "ERBB2 p.D769Y" ;
     :hasEffect :GoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants ;
     :upregulatesPathway :Signaling_by_ERBB2_KD_Mutants .
 
 :ERBB2_p.G309A a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "ERBB2 p.G309A" ;
     :hasEffect :GoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants ;
     :upregulatesPathway :Signaling_by_ERBB2_ECD_mutants .
 
 :ERBB2_p.I767M a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "ERBB2 p.I767M" ;
     :hasEffect :GoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants ;
     :upregulatesPathway :Signaling_by_ERBB2_KD_Mutants .
 
 :ERBB2_p.L755M a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "ERBB2 p.L755M" ;
     :hasEffect :GoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants ;
     :upregulatesPathway :Signaling_by_ERBB2_KD_Mutants .
 
 :ERBB2_p.L755S a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "ERBB2 p.L755S" ;
     :hasEffect :GoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants ;
     :upregulatesPathway :Signaling_by_ERBB2_KD_Mutants .
 
 :ERBB2_p.L755W a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "ERBB2 p.L755W" ;
     :hasEffect :GoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants ;
     :upregulatesPathway :Signaling_by_ERBB2_KD_Mutants .
 
 :ERBB2_p.R678Q a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "ERBB2 p.R678Q" ;
     :hasEffect :GoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants ;
     :upregulatesPathway :Signaling_by_ERBB2_TMD_JMD_mutants .
 
 :ERBB2_p.V842I a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "ERBB2 p.V842I" ;
     :hasEffect :GoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants ;
     :upregulatesPathway :Signaling_by_ERBB2_KD_Mutants .
 
 :Her2 a owl:Class ;
@@ -191,18 +308,26 @@
     owl:equivalentClass [ a owl:Class ;
             owl:intersectionOf ( :Patient [ a owl:Restriction ;
                         owl:onProperty :hasUpregulatedPathway ;
-                        owl:someValuesFrom :HER2-related_pathway ] ) ] .
+                        owl:someValuesFrom :HER2-related_pathway ] [ a owl:Class ;
+                        owl:unionOf ( [ a owl:Class ;
+                                    owl:intersectionOf ( [ a owl:Restriction ;
+                                                owl:onProperty :hasNormallyRegulatedPathway ;
+                                                owl:someValuesFrom :ER-related_pathway ] [ a owl:Restriction ;
+                                                owl:onProperty :hasNormallyRegulatedPathway ;
+                                                owl:someValuesFrom :PR-related_pathway ] [ a owl:Restriction ;
+                                                owl:onProperty :hasUpregulatedPathway ;
+                                                owl:someValuesFrom :Ki-67-related_pathway ] ) ] [ a owl:Class ;
+                                    owl:intersectionOf ( [ a owl:Restriction ;
+                                                owl:onProperty :hasNormallyRegulatedPathway ;
+                                                owl:someValuesFrom :Ki-67-related_pathway ] [ a owl:Restriction ;
+                                                owl:onProperty :hasUpregulatedPathway ;
+                                                owl:someValuesFrom :ER-related_pathway ] ) ] ) ] ) ] .
 
 :Ki-67 a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene>,
         :Ki-67,
         owl:Class,
         owl:NamedIndividual ;
     rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> .
-
-:Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>,
-        :ER-related_pathway,
-        owl:NamedIndividual ;
-    rdfs:label "Loss of function of TP53 in cancer due to loss of tetramerization ability" .
 
 :LumA a owl:Class ;
     rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#BreastCancerSubType> ;
@@ -211,7 +336,9 @@
                         owl:onProperty :hasUpregulatedPathway ;
                         owl:someValuesFrom :ER-related_pathway ] [ a owl:Restriction ;
                         owl:onProperty :hasUpregulatedPathway ;
-                        owl:someValuesFrom :PR-related_pathway ] ) ] .
+                        owl:someValuesFrom :PR-related_pathway ] [ a owl:Restriction ;
+                        owl:onProperty :hasNormallyRegulatedPathway ;
+                        owl:someValuesFrom :Ki-67-related_pathway ] ) ] .
 
 :LumB a owl:Class ;
     rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#BreastCancerSubType> ;
@@ -219,11 +346,16 @@
             owl:intersectionOf ( :Patient [ a owl:Restriction ;
                         owl:onProperty :hasUpregulatedPathway ;
                         owl:someValuesFrom :ER-related_pathway ] [ a owl:Class ;
-                        owl:unionOf ( [ a owl:Restriction ;
+                        owl:unionOf ( [ a owl:Class ;
+                                    owl:intersectionOf ( [ a owl:Restriction ;
+                                                owl:onProperty :hasNormallyRegulatedPathway ;
+                                                owl:someValuesFrom :HER2-related_pathway ] [ a owl:Restriction ;
+                                                owl:onProperty :hasNormallyRegulatedPathway ;
+                                                owl:someValuesFrom :PR-related_pathway ] [ a owl:Restriction ;
+                                                owl:onProperty :hasUpregulatedPathway ;
+                                                owl:someValuesFrom :Ki-67-related_pathway ] ) ] [ a owl:Restriction ;
                                     owl:onProperty :hasUpregulatedPathway ;
-                                    owl:someValuesFrom :HER2-related_pathway ] [ a owl:Restriction ;
-                                    owl:onProperty :hasUpregulatedPathway ;
-                                    owl:someValuesFrom :Ki-67-related_pathway ] ) ] ) ] .
+                                    owl:someValuesFrom :HER2-related_pathway ] ) ] ) ] .
 
 :PIK3CA a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene>,
         :PIK3CA,
@@ -245,48 +377,128 @@
         owl:NamedIndividual ;
     rdfs:label "PIK3CA p.E542K" ;
     :hasEffect :GoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants ;
     :upregulatesPathway :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer .
 
 :PIK3CA_p.E545A a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "PIK3CA p.E545A" ;
     :hasEffect :GoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants ;
     :upregulatesPathway :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer .
 
 :PIK3CA_p.E545G a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "PIK3CA p.E545G" ;
     :hasEffect :GoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants ;
     :upregulatesPathway :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer .
 
 :PIK3CA_p.H1047L a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "PIK3CA p.H1047L" ;
     :hasEffect :GoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants ;
     :upregulatesPathway :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer .
 
 :PIK3CA_p.H1047Y a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "PIK3CA p.H1047Y" ;
     :hasEffect :GoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants ;
     :upregulatesPathway :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer .
 
 :PIK3CA_p.M1043I a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "PIK3CA p.M1043I" ;
     :hasEffect :GoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants ;
     :upregulatesPathway :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer .
 
 :PIK3CA_p.Q546K a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "PIK3CA p.Q546K" ;
     :hasEffect :GoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants ;
     :upregulatesPathway :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer .
 
 :PIK3CA_p.Q546R a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "PIK3CA p.Q546R" ;
     :hasEffect :GoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants ;
     :upregulatesPathway :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer .
 
 :PR a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene>,
@@ -311,31 +523,81 @@
         owl:NamedIndividual ;
     rdfs:label "PTEN p.Q149*" ;
     :downregulatesPathway :PTEN_Loss_of_Function_in_Cancer ;
-    :hasEffect :LoF .
+    :hasEffect :LoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants .
 
 :PTEN_p.R130P a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "PTEN p.R130P" ;
     :downregulatesPathway :PTEN_Loss_of_Function_in_Cancer ;
-    :hasEffect :LoF .
+    :hasEffect :LoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants .
 
 :PTEN_p.S287_ a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "PTEN p.S287*" ;
     :downregulatesPathway :PTEN_Loss_of_Function_in_Cancer ;
-    :hasEffect :LoF .
+    :hasEffect :LoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants .
 
 :PTEN_p.S59_ a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "PTEN p.S59*" ;
     :downregulatesPathway :PTEN_Loss_of_Function_in_Cancer ;
-    :hasEffect :LoF .
+    :hasEffect :LoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants .
 
 :PTEN_p.Y88_ a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "PTEN p.Y88*" ;
     :downregulatesPathway :PTEN_Loss_of_Function_in_Cancer ;
-    :hasEffect :LoF .
+    :hasEffect :LoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants .
 
 :RB1 a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene>,
         :RB1,
@@ -353,35 +615,85 @@
     rdfs:label "RB1 p.A74Efs*4" ;
     :downregulatesPathway :Defective_translocation_of_RB1_mutants_to_the_nucleus ;
     :hasEffect :LoF,
-        :Partial_LoF .
+        :Partial_LoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants .
 
 :RB1_p.R455_ a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "RB1 p.R455*" ;
     :downregulatesPathway :Defective_translocation_of_RB1_mutants_to_the_nucleus ;
     :hasEffect :LoF,
-        :Partial_LoF .
+        :Partial_LoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants .
 
 :RB1_p.R552_ a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "RB1 p.R552*" ;
     :downregulatesPathway :Defective_translocation_of_RB1_mutants_to_the_nucleus ;
     :hasEffect :LoF,
-        :Partial_LoF .
+        :Partial_LoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants .
 
 :RB1_p.S215_ a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "RB1 p.S215*" ;
     :downregulatesPathway :Defective_translocation_of_RB1_mutants_to_the_nucleus ;
     :hasEffect :LoF,
-        :Partial_LoF .
+        :Partial_LoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants .
 
 :RB1_p.S829_ a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "RB1 p.S829*" ;
     :downregulatesPathway :Defective_translocation_of_RB1_mutants_to_the_nucleus ;
     :hasEffect :LoF,
-        :Partial_LoF .
+        :Partial_LoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants .
 
 :SMAD4 a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene>,
         :SMAD4,
@@ -396,24 +708,49 @@
         owl:NamedIndividual ;
     rdfs:label "SMAD4 p.E526*" ;
     :downregulatesPathway :SMAD4_MH2_Domain_Mutants_in_Cancer ;
-    :hasEffect :LoF .
+    :hasEffect :LoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants .
 
 :SMAD4_p.Q245_ a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "SMAD4 p.Q245*" ;
     :downregulatesPathway :SMAD4_MH2_Domain_Mutants_in_Cancer ;
-    :hasEffect :LoF .
+    :hasEffect :LoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants .
 
 :SMAD4_p.Q334_ a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "SMAD4 p.Q334*" ;
     :downregulatesPathway :SMAD4_MH2_Domain_Mutants_in_Cancer ;
-    :hasEffect :LoF .
-
-:Signaling_by_ERBB2_TMD_JMD_mutants a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>,
-        :HER2-related_pathway,
-        owl:NamedIndividual ;
-    rdfs:label "Signaling by ERBB2 TMD/JMD mutants" .
+    :hasEffect :LoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants .
 
 :downregulatesPathway a owl:ObjectProperty ;
     rdfs:domain <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> ;
@@ -432,6 +769,11 @@
 :isLoFMutationOf a owl:ObjectProperty ;
     owl:inverseOf :hasLoFMutation .
 
+:normallyRegulatesPathway a owl:ObjectProperty ;
+    rdfs:domain <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> ;
+    rdfs:range <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> ;
+    rdfs:subPropertyOf owl:topObjectProperty .
+
 :upregulatesPathway a owl:ObjectProperty ;
     rdfs:domain <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> ;
     rdfs:range <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> ;
@@ -448,55 +790,102 @@
         owl:NamedIndividual ;
     rdfs:label "BRCA1 p.C61G" ;
     :downregulatesPathway :Defective_Homologous_Recombination_Repair ;
-    :hasEffect :LoF .
-
-:Defective_Homologous_Recombination_Repair a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>,
-        :DNA_Repair_Pathway,
-        owl:NamedIndividual ;
-    rdfs:label "Defective Homologous Recombination Repair" .
+    :hasEffect :LoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants .
 
 :ERBB2_p.S310F a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "ERBB2 p.S310F" ;
     :hasEffect :GoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants ;
     :upregulatesPathway :Signaling_by_ERBB2_ECD_mutants .
 
 :ERBB2_p.V777L a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "ERBB2 p.V777L" ;
     :hasEffect :GoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants ;
     :upregulatesPathway :Signaling_by_ERBB2_KD_Mutants .
 
 :PIK3CA_p.E545K a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "PIK3CA p.E545K" ;
     :hasEffect :GoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants ;
     :upregulatesPathway :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer .
 
 :PIK3CA_p.H1047R a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "PIK3CA p.H1047R" ;
     :hasEffect :GoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants ;
     :upregulatesPathway :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer .
-
-:PR-related_pathway a owl:Class ;
-    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> .
 
 :PTEN_p.R130Q a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         owl:NamedIndividual ;
     rdfs:label "PTEN p.R130Q" ;
     :downregulatesPathway :PTEN_Loss_of_Function_in_Cancer ;
-    :hasEffect :LoF .
+    :hasEffect :LoF ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants .
 
 :PathwayCategory a owl:Class ;
     rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> ;
     owl:equivalentClass [ a owl:Class ;
             owl:unionOf ( :ER-related_pathway :PR-related_pathway :HER2-related_pathway :Ki-67-related_pathway ) ] .
-
-:Signaling_by_ERBB2_ECD_mutants a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>,
-        :HER2-related_pathway,
-        owl:NamedIndividual ;
-    rdfs:label "Signaling by ERBB2 ECD mutants" .
 
 :TP53 a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene>,
         :TP53,
@@ -511,6 +900,15 @@
     :downregulatesPathway :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability ;
     :hasEffect :LoF,
         :Partial_LoF ;
+    :normallyRegulatesPathway :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants ;
     :upregulatesPathway :Cell_Proliferation_due_to_TP53_Loss .
 
 :hasLoF a owl:ObjectProperty ;
@@ -518,43 +916,32 @@
     rdfs:range <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> ;
     owl:propertyChainAxiom ( :hasMutation :isLoFMutationOf ) .
 
-:SMAD4_MH2_Domain_Mutants_in_Cancer a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>,
-        :ER-related_pathway,
-        owl:NamedIndividual ;
-    rdfs:label "SMAD4 MH2 Domain Mutants in Cancer" .
-
-:Ki-67-related_pathway a owl:Class ;
-    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> .
-
 :Mutation_Effect a owl:Class ;
     rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> .
 
 <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#BreastCancerSubType> a owl:Class .
 
-:Defective_translocation_of_RB1_mutants_to_the_nucleus a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>,
-        :ER-related_pathway,
-        owl:NamedIndividual ;
-    rdfs:label "Defective translocation of RB1 mutants to the nucleus" .
-
-:HER2-related_pathway a owl:Class ;
+:PR-related_pathway a owl:Class ;
     rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> .
-
-:PTEN_Loss_of_Function_in_Cancer a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>,
-        :ER-related_pathway,
-        owl:NamedIndividual ;
-    rdfs:label "PTEN Loss of Function in Cancer" .
 
 :Partial_LoF a :Mutation_Effect,
         owl:NamedIndividual .
+
+:Ki-67-related_pathway a owl:Class ;
+    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> .
 
 :hasMutation a owl:ObjectProperty ;
     rdfs:domain :Patient ;
     rdfs:subPropertyOf owl:topObjectProperty .
 
-:Signaling_by_ERBB2_KD_Mutants a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>,
-        :HER2-related_pathway,
-        owl:NamedIndividual ;
-    rdfs:label "Signaling by ERBB2 KD Mutants" .
+:HER2-related_pathway a owl:Class ;
+    rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> .
+
+:hasNormallyRegulatedPathway a owl:ObjectProperty ;
+    rdfs:domain :Patient ;
+    rdfs:range <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> ;
+    rdfs:subPropertyOf owl:topObjectProperty ;
+    owl:propertyChainAxiom ( :hasMutation :normallyRegulatesPathway ) .
 
 :hasUpregulatedPathway a owl:ObjectProperty ;
     rdfs:domain :Patient ;
@@ -565,11 +952,6 @@
 :ER-related_pathway a owl:Class ;
     rdfs:subClassOf <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> .
 
-:Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>,
-        :ER-related_pathway,
-        owl:NamedIndividual ;
-    rdfs:label "Constitutive Signaling by Aberrant PI3K in Cancer" .
-
 :Patient a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:allValuesFrom :PathwayCategory ;
@@ -577,15 +959,92 @@
 
 :LoF a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         :Mutation_Effect,
-        owl:NamedIndividual .
+        owl:NamedIndividual ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants .
 
 <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway> a owl:Class .
 
 :GoF a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation>,
         :Mutation_Effect,
-        owl:NamedIndividual .
+        owl:NamedIndividual ;
+    :normallyRegulatesPathway :Cell_Proliferation_due_to_TP53_Loss,
+        :Constitutive_Signaling_by_AKT1_E17K_in_Cancer,
+        :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer,
+        :Defective_Homologous_Recombination_Repair,
+        :Defective_translocation_of_RB1_mutants_to_the_nucleus,
+        :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability,
+        :PTEN_Loss_of_Function_in_Cancer,
+        :SMAD4_MH2_Domain_Mutants_in_Cancer,
+        :Signaling_by_ERBB2_ECD_mutants,
+        :Signaling_by_ERBB2_KD_Mutants,
+        :Signaling_by_ERBB2_TMD_JMD_mutants .
 
 <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Gene> a owl:Class .
+
+:Cell_Proliferation_due_to_TP53_Loss a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>,
+        :Ki-67-related_pathway,
+        owl:NamedIndividual ;
+    rdfs:label "Cell Proliferation due to TP53 Loss" .
+
+:Constitutive_Signaling_by_AKT1_E17K_in_Cancer a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>,
+        :ER-related_pathway,
+        owl:NamedIndividual ;
+    rdfs:label "Constitutive Signaling by AKT1 E17K in Cancer" .
+
+:Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>,
+        :ER-related_pathway,
+        owl:NamedIndividual ;
+    rdfs:label "Constitutive Signaling by Aberrant PI3K in Cancer" .
+
+:Defective_Homologous_Recombination_Repair a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>,
+        :DNA_Repair_Pathway,
+        owl:NamedIndividual ;
+    rdfs:label "Defective Homologous Recombination Repair" .
+
+:Defective_translocation_of_RB1_mutants_to_the_nucleus a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>,
+        :ER-related_pathway,
+        owl:NamedIndividual ;
+    rdfs:label "Defective translocation of RB1 mutants to the nucleus" .
+
+:Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>,
+        :ER-related_pathway,
+        owl:NamedIndividual ;
+    rdfs:label "Loss of function of TP53 in cancer due to loss of tetramerization ability" .
+
+:PTEN_Loss_of_Function_in_Cancer a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>,
+        :ER-related_pathway,
+        owl:NamedIndividual ;
+    rdfs:label "PTEN Loss of Function in Cancer" .
+
+:SMAD4_MH2_Domain_Mutants_in_Cancer a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>,
+        :ER-related_pathway,
+        owl:NamedIndividual ;
+    rdfs:label "SMAD4 MH2 Domain Mutants in Cancer" .
+
+:Signaling_by_ERBB2_ECD_mutants a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>,
+        :HER2-related_pathway,
+        owl:NamedIndividual ;
+    rdfs:label "Signaling by ERBB2 ECD mutants" .
+
+:Signaling_by_ERBB2_KD_Mutants a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>,
+        :HER2-related_pathway,
+        owl:NamedIndividual ;
+    rdfs:label "Signaling by ERBB2 KD Mutants" .
+
+:Signaling_by_ERBB2_TMD_JMD_mutants a <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Pathway>,
+        :HER2-related_pathway,
+        owl:NamedIndividual ;
+    rdfs:label "Signaling by ERBB2 TMD/JMD mutants" .
 
 <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5#Mutation> a owl:Class .
 

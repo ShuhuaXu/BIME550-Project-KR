@@ -111,6 +111,12 @@ def create_ontology(input_csv, output_ttl):
     g.add((upregulates_pathway, RDFS.domain, mutation_class))
     g.add((upregulates_pathway, RDFS.range, pathway_class))
 
+    normally_regulates_pathway = BASE.normallyRegulatesPathway
+    g.add((normally_regulates_pathway, RDF.type, OWL.ObjectProperty))
+    g.add((normally_regulates_pathway, RDFS.subPropertyOf, OWL.topObjectProperty))
+    g.add((normally_regulates_pathway, RDFS.domain, mutation_class))
+    g.add((normally_regulates_pathway, RDFS.range, pathway_class))
+
     has_downregulated_pathway = BASE.hasDownregulatedPathway
     g.add((has_downregulated_pathway, RDF.type, OWL.ObjectProperty))
     g.add((has_downregulated_pathway, RDFS.subPropertyOf, OWL.topObjectProperty))
@@ -122,6 +128,12 @@ def create_ontology(input_csv, output_ttl):
     g.add((has_upregulated_pathway, RDFS.subPropertyOf, OWL.topObjectProperty))
     g.add((has_upregulated_pathway, RDFS.domain, patient_class))
     # Range will be set to PathwayCategory after it's defined (enables negation reasoning)
+
+    has_normally_regulated_pathway = BASE.hasNormallyRegulatedPathway
+    g.add((has_normally_regulated_pathway, RDF.type, OWL.ObjectProperty))
+    g.add((has_normally_regulated_pathway, RDFS.subPropertyOf, OWL.topObjectProperty))
+    g.add((has_normally_regulated_pathway, RDFS.domain, patient_class))
+    g.add((has_normally_regulated_pathway, RDFS.range, pathway_class))
 
     has_effect = BASE.hasEffect
     g.add((has_effect, RDF.type, OWL.ObjectProperty))
@@ -176,6 +188,11 @@ def create_ontology(input_csv, output_ttl):
     chain2 = BNode()
     Collection(g, chain2, [has_mutation, downregulates_pathway])
     g.add((has_downregulated_pathway, OWL.propertyChainAxiom, chain2))
+
+    # S2b: hasMutation o normallyRegulatesPathway → hasNormallyRegulatedPathway
+    chain2b = BNode()
+    Collection(g, chain2b, [has_mutation, normally_regulates_pathway])
+    g.add((has_normally_regulated_pathway, OWL.propertyChainAxiom, chain2b))
 
     # S3/S4: hasMutation o isGoFMutationOf → hasGoF
     # Patient -hasMutation-> Mutation -isGoFMutationOf-> Gene = Patient hasGoF Gene
@@ -408,10 +425,37 @@ def create_ontology(input_csv, output_ttl):
     g.add((brca2_mut, downregulates_pathway, brca_hr_pathway))
     g.add((BASE['BRCA2'], has_lof_mutation, brca2_mut))
 
+    # ── Normal Regulation Assertions (Closed World Assumption) ─────────────
+    print("Adding normal regulation assertions for unaffected pathways...")
+
+    # Collect all pathway individuals (typed as instances of pathway_class)
+    all_pathways = set()
+    for pathway_name in pathway_to_parent.keys():
+        all_pathways.add(BASE[clean_uri_string(pathway_name)])
+    all_pathways.add(tp53_proliferation)
+    all_pathways.add(brca_hr_pathway)
+
+    # For each mutation, find which pathways it affects and assert normal regulation for others
+    for mutation_uri in g.subjects(RDF.type, mutation_class):
+        if isinstance(mutation_uri, BNode):
+            continue  # Skip blank nodes
+
+        # Find pathways this mutation affects (upregulates or downregulates)
+        affected_pathways = set()
+        for pathway in g.objects(mutation_uri, upregulates_pathway):
+            affected_pathways.add(pathway)
+        for pathway in g.objects(mutation_uri, downregulates_pathway):
+            affected_pathways.add(pathway)
+
+        # Assert normallyRegulates for all unaffected pathways
+        for pathway_uri in all_pathways:
+            if pathway_uri not in affected_pathways:
+                g.add((mutation_uri, normally_regulates_pathway, pathway_uri))
+
     # ── Equivalent Class Axioms for Breast Cancer Subtypes ─────────────────
     print("Adding equivalent class axioms for subtype classification...")
     add_subtype_definitions(g, patient_class,
-                            has_lof, has_gof, has_upregulated_pathway,
+                            has_lof, has_gof, has_upregulated_pathway, has_normally_regulated_pathway,
                             er_related, her2_related, pr_related, ki67_related)
 
     # ── AllDisjointClasses for Subtypes ────────────────────────────────────
@@ -437,64 +481,89 @@ def create_ontology(input_csv, output_ttl):
 
 
 def add_subtype_definitions(g, patient_class,
-                            has_lof, has_gof, has_upregulated_pathway,
+                            has_lof, has_gof, has_upregulated_pathway, has_normally_regulated_pathway,
                             er_related, her2_related, pr_related, ki67_related):
     """
     Add OWL equivalent class axioms for breast cancer subtypes.
-    Uses positive-only criteria without negation (owl:complementOf).
-
-    NOTE: Subtypes are NOT declared as disjoint - patients may satisfy multiple
-    subtype definitions based on their mutation profile (e.g., ER+/HER2+ patients
-    would be classified as both Her2 and LumB).
+    Uses positive-only criteria by combining upregulation and normal regulation assertions.
+    Implements Closed World Assumption pattern - negation expressed as explicit normal regulation.
 
     Subtype definitions (based on PAM50 molecular classification):
 
-    Basal-like: Patient AND hasLoF(BRCA1) AND hasLoF(TP53) AND hasUpregulatedPathway(Ki-67)
-    HER2-enriched: Patient AND hasUpregulatedPathway(HER2)
-    Luminal A: Patient AND hasUpregulatedPathway(ER) AND hasUpregulatedPathway(PR)
-    Luminal B: Patient AND hasUpregulatedPathway(ER) AND (hasUpregulatedPathway(HER2) OR hasUpregulatedPathway(Ki-67))
+    Basal-like: Patient AND hasLoF(BRCA1) AND hasLoF(TP53) AND Ki-67↑ AND ER-normal AND HER2-normal AND PR-normal
+    HER2-enriched: Patient AND HER2↑ AND ((ER-normal AND PR-normal AND Ki-67↑) OR (Ki-67-normal AND ER↑))
+    Luminal A: Patient AND ER↑ AND PR↑ AND Ki-67-normal
+    Luminal B: Patient AND ER↑ AND ((HER2-normal AND PR-normal AND Ki-67↑) OR HER2↑)
     """
 
     # ── Basal ──────────────────────────────────────────────────────────────
     # Patient AND (hasLoF some BRCA1)
     #        AND (hasLoF some TP53)
-    #        AND (hasUpregulatedPathway some Ki-67-related_pathway)
+    #        AND (hasUpregulatedPathway some Ki-67)
+    #        AND (hasNormallyRegulatedPathway some ER)
+    #        AND (hasNormallyRegulatedPathway some HER2)
+    #        AND (hasNormallyRegulatedPathway some PR)
     basal_def = owl_intersection(g, [
         patient_class,
         owl_some(g, has_lof, BASE['BRCA1']),
         owl_some(g, has_lof, BASE['TP53']),
         owl_some(g, has_upregulated_pathway, ki67_related),
+        owl_some(g, has_normally_regulated_pathway, er_related),
+        owl_some(g, has_normally_regulated_pathway, her2_related),
+        owl_some(g, has_normally_regulated_pathway, pr_related),
     ])
     g.add((BASE['Basal'], OWL.equivalentClass, basal_def))
 
     # ── Her2 ───────────────────────────────────────────────────────────────
-    # Patient AND (hasUpregulatedPathway some HER2-related_pathway)
+    # Patient AND HER2↑
+    #        AND ((ER-normal AND PR-normal AND Ki-67↑)      ← classic HER2-enriched
+    #             OR (Ki-67-normal AND ER↑))                ← HER2+/luminal crossover
     her2_def = owl_intersection(g, [
         patient_class,
         owl_some(g, has_upregulated_pathway, her2_related),
+        owl_union(g, [
+            # Branch 1: ER-normal, PR-normal, Ki-67↑ (classic HER2-enriched)
+            owl_intersection(g, [
+                owl_some(g, has_normally_regulated_pathway, er_related),
+                owl_some(g, has_normally_regulated_pathway, pr_related),
+                owl_some(g, has_upregulated_pathway, ki67_related),
+            ]),
+            # Branch 2: Ki-67-normal, ER↑ (HER2+/luminal crossover)
+            owl_intersection(g, [
+                owl_some(g, has_normally_regulated_pathway, ki67_related),
+                owl_some(g, has_upregulated_pathway, er_related),
+            ]),
+        ]),
     ])
     g.add((BASE['Her2'], OWL.equivalentClass, her2_def))
 
     # ── LumA ───────────────────────────────────────────────────────────────
-    # Patient AND (hasUpregulatedPathway some ER-related_pathway)
-    #        AND (hasUpregulatedPathway some PR-related_pathway)
+    # Patient AND ER↑ AND PR↑ AND Ki-67-normal
+    # (ER+, PR+, Ki-67 low — good prognosis luminal)
     luma_def = owl_intersection(g, [
         patient_class,
         owl_some(g, has_upregulated_pathway, er_related),
         owl_some(g, has_upregulated_pathway, pr_related),
+        owl_some(g, has_normally_regulated_pathway, ki67_related),
     ])
     g.add((BASE['LumA'], OWL.equivalentClass, luma_def))
 
     # ── LumB ───────────────────────────────────────────────────────────────
-    # Patient AND (hasUpregulatedPathway some ER-related_pathway)
-    #        AND ((hasUpregulatedPathway some HER2-related_pathway)
-    #             OR (hasUpregulatedPathway some Ki-67-related_pathway))
+    # Patient AND ER↑
+    #        AND ((HER2-normal AND PR-normal AND Ki-67↑)   ← LumB HER2-negative
+    #             OR HER2↑)                                ← LumB HER2-positive
     lumb_def = owl_intersection(g, [
         patient_class,
         owl_some(g, has_upregulated_pathway, er_related),
         owl_union(g, [
+            # Branch 1: HER2-normal, PR-normal, Ki-67↑ (LumB HER2-negative)
+            owl_intersection(g, [
+                owl_some(g, has_normally_regulated_pathway, her2_related),
+                owl_some(g, has_normally_regulated_pathway, pr_related),
+                owl_some(g, has_upregulated_pathway, ki67_related),
+            ]),
+            # Branch 2: HER2↑ (LumB HER2-positive)
             owl_some(g, has_upregulated_pathway, her2_related),
-            owl_some(g, has_upregulated_pathway, ki67_related),
         ]),
     ])
     g.add((BASE['LumB'], OWL.equivalentClass, lumb_def))
