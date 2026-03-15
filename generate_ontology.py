@@ -67,6 +67,15 @@ def owl_intersection(g, classes):
     return i
 
 
+def owl_has_value(g, prop, value):
+    """Create owl:Restriction with owl:hasValue"""
+    r = BNode()
+    g.add((r, RDF.type, OWL.Restriction))
+    g.add((r, OWL.onProperty, prop))
+    g.add((r, OWL.hasValue, value))
+    return r
+
+
 # ── Main Ontology Builder ─────────────────────────────────────────────────
 
 def create_ontology(input_csv, output_ttl):
@@ -99,23 +108,24 @@ def create_ontology(input_csv, output_ttl):
     patient_class = BASE.Patient
     mutation_effect_class = BASE.Mutation_Effect
 
+    affects_pathway = BASE.affectsPathway
+    g.add((affects_pathway, RDF.type, OWL.ObjectProperty))
+    g.add((affects_pathway, RDFS.domain, mutation_class))
+    g.add((affects_pathway, RDFS.range, pathway_class))
+
     downregulates_pathway = BASE.downregulatesPathway
     g.add((downregulates_pathway, RDF.type, OWL.ObjectProperty))
+    g.add((downregulates_pathway, RDFS.subPropertyOf, affects_pathway))
     g.add((downregulates_pathway, RDFS.subPropertyOf, OWL.topObjectProperty))
     g.add((downregulates_pathway, RDFS.domain, mutation_class))
     g.add((downregulates_pathway, RDFS.range, pathway_class))
 
     upregulates_pathway = BASE.upregulatesPathway
     g.add((upregulates_pathway, RDF.type, OWL.ObjectProperty))
+    g.add((upregulates_pathway, RDFS.subPropertyOf, affects_pathway))
     g.add((upregulates_pathway, RDFS.subPropertyOf, OWL.topObjectProperty))
     g.add((upregulates_pathway, RDFS.domain, mutation_class))
     g.add((upregulates_pathway, RDFS.range, pathway_class))
-
-    normally_regulates_pathway = BASE.normallyRegulatesPathway
-    g.add((normally_regulates_pathway, RDF.type, OWL.ObjectProperty))
-    g.add((normally_regulates_pathway, RDFS.subPropertyOf, OWL.topObjectProperty))
-    g.add((normally_regulates_pathway, RDFS.domain, mutation_class))
-    g.add((normally_regulates_pathway, RDFS.range, pathway_class))
 
     has_downregulated_pathway = BASE.hasDownregulatedPathway
     g.add((has_downregulated_pathway, RDF.type, OWL.ObjectProperty))
@@ -129,12 +139,6 @@ def create_ontology(input_csv, output_ttl):
     g.add((has_upregulated_pathway, RDFS.domain, patient_class))
     # Range will be set to PathwayCategory after it's defined (enables negation reasoning)
 
-    has_normally_regulated_pathway = BASE.hasNormallyRegulatedPathway
-    g.add((has_normally_regulated_pathway, RDF.type, OWL.ObjectProperty))
-    g.add((has_normally_regulated_pathway, RDFS.subPropertyOf, OWL.topObjectProperty))
-    g.add((has_normally_regulated_pathway, RDFS.domain, patient_class))
-    g.add((has_normally_regulated_pathway, RDFS.range, pathway_class))
-
     has_effect = BASE.hasEffect
     g.add((has_effect, RDF.type, OWL.ObjectProperty))
     g.add((has_effect, RDFS.subPropertyOf, OWL.topObjectProperty))
@@ -145,6 +149,12 @@ def create_ontology(input_csv, output_ttl):
     g.add((has_mutation, RDF.type, OWL.ObjectProperty))
     g.add((has_mutation, RDFS.subPropertyOf, OWL.topObjectProperty))
     g.add((has_mutation, RDFS.domain, patient_class))
+
+    not_has_mutation = BASE.notHasMutation
+    g.add((not_has_mutation, RDF.type, OWL.ObjectProperty))
+    g.add((not_has_mutation, RDFS.domain, patient_class))
+    g.add((not_has_mutation, RDFS.range, mutation_class))
+    g.add((has_mutation, OWL.propertyDisjointWith, not_has_mutation))
 
     has_gof = BASE.hasGoF
     g.add((has_gof, RDF.type, OWL.ObjectProperty))
@@ -188,11 +198,6 @@ def create_ontology(input_csv, output_ttl):
     chain2 = BNode()
     Collection(g, chain2, [has_mutation, downregulates_pathway])
     g.add((has_downregulated_pathway, OWL.propertyChainAxiom, chain2))
-
-    # S2b: hasMutation o normallyRegulatesPathway → hasNormallyRegulatedPathway
-    chain2b = BNode()
-    Collection(g, chain2b, [has_mutation, normally_regulates_pathway])
-    g.add((has_normally_regulated_pathway, OWL.propertyChainAxiom, chain2b))
 
     # S3/S4: hasMutation o isGoFMutationOf → hasGoF
     # Patient -hasMutation-> Mutation -isGoFMutationOf-> Gene = Patient hasGoF Gene
@@ -425,38 +430,15 @@ def create_ontology(input_csv, output_ttl):
     g.add((brca2_mut, downregulates_pathway, brca_hr_pathway))
     g.add((BASE['BRCA2'], has_lof_mutation, brca2_mut))
 
-    # ── Normal Regulation Assertions (Closed World Assumption) ─────────────
-    print("Adding normal regulation assertions for unaffected pathways...")
-
-    # Collect all pathway individuals (typed as instances of pathway_class)
-    all_pathways = set()
-    for pathway_name in pathway_to_parent.keys():
-        all_pathways.add(BASE[clean_uri_string(pathway_name)])
-    all_pathways.add(tp53_proliferation)
-    all_pathways.add(brca_hr_pathway)
-
-    # For each mutation, find which pathways it affects and assert normal regulation for others
-    for mutation_uri in g.subjects(RDF.type, mutation_class):
-        if isinstance(mutation_uri, BNode):
-            continue  # Skip blank nodes
-
-        # Find pathways this mutation affects (upregulates or downregulates)
-        affected_pathways = set()
-        for pathway in g.objects(mutation_uri, upregulates_pathway):
-            affected_pathways.add(pathway)
-        for pathway in g.objects(mutation_uri, downregulates_pathway):
-            affected_pathways.add(pathway)
-
-        # Assert normallyRegulates for all unaffected pathways
-        for pathway_uri in all_pathways:
-            if pathway_uri not in affected_pathways:
-                g.add((mutation_uri, normally_regulates_pathway, pathway_uri))
+    # ── Normal Classes (for negation reasoning) ────────────────────────────
+    print("Creating Normal classes (ER-Normal, HER2-Normal, Ki-67-Normal)...")
+    create_normal_classes(g, patient_class, not_has_mutation, df)
 
     # ── Equivalent Class Axioms for Breast Cancer Subtypes ─────────────────
     print("Adding equivalent class axioms for subtype classification...")
-    add_subtype_definitions(g, patient_class,
-                            has_lof, has_gof, has_upregulated_pathway, has_normally_regulated_pathway,
-                            er_related, her2_related, pr_related, ki67_related)
+    add_subtype_definitions(g, patient_class, not_has_mutation,
+                            has_lof, has_gof, has_upregulated_pathway,
+                            er_related, her2_related, ki67_related)
 
     # ── AllDisjointClasses for Subtypes ────────────────────────────────────
     # REMOVED: Disjoint classes declaration causes unsatisfiability with positive-only
@@ -467,7 +449,7 @@ def create_ontology(input_csv, output_ttl):
     # ── Sample Patient Individuals for Demo ────────────────────────────────
     print("Adding sample patient individuals...")
     add_sample_patients(g, patient_class, mutation_class,
-                        has_mutation, has_effect, lof, gof)
+                        has_mutation, not_has_mutation)
 
     # ── Serialize ──────────────────────────────────────────────────────────
     print(f"\nSerializing ontology to {output_ttl}...")
@@ -480,163 +462,242 @@ def create_ontology(input_csv, output_ttl):
     print(f"\nOntology file created successfully: {output_ttl}")
 
 
-def add_subtype_definitions(g, patient_class,
-                            has_lof, has_gof, has_upregulated_pathway, has_normally_regulated_pathway,
-                            er_related, her2_related, pr_related, ki67_related):
+def create_normal_classes(g, patient_class, not_has_mutation, df):
+    """
+    Create ER-Normal, HER2-Normal, and Ki-67-Normal classes.
+    These are defined as Patient AND (notHasMutation for all relevant pathway mutations).
+    """
+    # Collect mutations by pathway category
+    er_mutations = set()
+    her2_mutations = set()
+    ki67_mutations = set()
+
+    for _, row in df.iterrows():
+        gene_symbol = str(row['Gene'])
+        mutation = str(row['Mutation'])
+        pathway_name = str(row['Pathway'])
+
+        mutation_id = f"{gene_symbol}_{clean_uri_string(mutation)}"
+        mutation_uri = BASE[mutation_id]
+
+        # Categorize mutations by pathway
+        if 'AKT1' in pathway_name or 'PI3K' in pathway_name or 'PTEN' in pathway_name or 'RB1' in pathway_name or 'SMAD4' in pathway_name:
+            er_mutations.add(mutation_uri)
+        if 'ERBB2' in pathway_name or 'HER2' in pathway_name:
+            her2_mutations.add(mutation_uri)
+        if 'TP53' in gene_symbol:
+            ki67_mutations.add(mutation_uri)
+
+    # Add known mutations
+    er_mutations.update([
+        BASE['AKT1_p.E17K'],
+        BASE['PIK3CA_p.E542K'], BASE['PIK3CA_p.E545A'], BASE['PIK3CA_p.E545G'],
+        BASE['PIK3CA_p.E545K'], BASE['PIK3CA_p.H1047L'], BASE['PIK3CA_p.H1047R'],
+        BASE['PIK3CA_p.H1047Y'], BASE['PIK3CA_p.M1043I'], BASE['PIK3CA_p.Q546K'],
+        BASE['PIK3CA_p.Q546R'],
+        BASE['PTEN_p.Q149_'], BASE['PTEN_p.R130P'], BASE['PTEN_p.R130Q'],
+        BASE['PTEN_p.S287_'], BASE['PTEN_p.S59_'], BASE['PTEN_p.Y88_'],
+        BASE['RB1_p.A74Efs_4'], BASE['RB1_p.R455_'], BASE['RB1_p.R552_'],
+        BASE['RB1_p.S215_'], BASE['RB1_p.S829_'],
+        BASE['SMAD4_p.E526_'], BASE['SMAD4_p.Q245_'], BASE['SMAD4_p.Q334_'],
+    ])
+
+    her2_mutations.update([
+        BASE['ERBB2_p.D769H'], BASE['ERBB2_p.D769Y'], BASE['ERBB2_p.G309A'],
+        BASE['ERBB2_p.I767M'], BASE['ERBB2_p.L755M'], BASE['ERBB2_p.L755S'],
+        BASE['ERBB2_p.L755W'], BASE['ERBB2_p.R678Q'], BASE['ERBB2_p.S310F'],
+        BASE['ERBB2_p.V777L'], BASE['ERBB2_p.V842I'],
+    ])
+
+    ki67_mutations.add(BASE['TP53_p.R342P'])
+
+    # ER-Normal: Patient with notHasMutation for all ER-related mutations
+    er_normal_restrictions = [patient_class]
+    for mut in er_mutations:
+        er_normal_restrictions.append(owl_has_value(g, not_has_mutation, mut))
+    er_normal_def = owl_intersection(g, er_normal_restrictions)
+    g.add((BASE['ER-Normal'], RDF.type, OWL.Class))
+    g.add((BASE['ER-Normal'], OWL.equivalentClass, er_normal_def))
+    g.add((BASE['ER-Normal'], RDFS.subClassOf, patient_class))
+
+    # HER2-Normal: Patient with notHasMutation for all HER2-related mutations
+    her2_normal_restrictions = [patient_class]
+    for mut in her2_mutations:
+        her2_normal_restrictions.append(owl_has_value(g, not_has_mutation, mut))
+    her2_normal_def = owl_intersection(g, her2_normal_restrictions)
+    g.add((BASE['HER2-Normal'], RDF.type, OWL.Class))
+    g.add((BASE['HER2-Normal'], OWL.equivalentClass, her2_normal_def))
+    g.add((BASE['HER2-Normal'], RDFS.subClassOf, patient_class))
+
+    # Ki-67-Normal: Patient with notHasMutation for all Ki-67-related mutations
+    ki67_normal_restrictions = [patient_class]
+    for mut in ki67_mutations:
+        ki67_normal_restrictions.append(owl_has_value(g, not_has_mutation, mut))
+    ki67_normal_def = owl_intersection(g, ki67_normal_restrictions)
+    g.add((BASE['Ki-67-Normal'], RDF.type, OWL.Class))
+    g.add((BASE['Ki-67-Normal'], OWL.equivalentClass, ki67_normal_def))
+    g.add((BASE['Ki-67-Normal'], RDFS.subClassOf, patient_class))
+
+
+def add_subtype_definitions(g, patient_class, not_has_mutation,
+                            has_lof, has_gof, has_upregulated_pathway,
+                            er_related, her2_related, ki67_related):
     """
     Add OWL equivalent class axioms for breast cancer subtypes.
-    Uses positive-only criteria by combining upregulation and normal regulation assertions.
-    Implements Closed World Assumption pattern - negation expressed as explicit normal regulation.
+    Uses the Normal classes (ER-Normal, HER2-Normal, Ki-67-Normal) for negation reasoning.
 
-    Subtype definitions (based on PAM50 molecular classification):
+    Subtype definitions matching the presentation version:
 
-    Basal-like: Patient AND hasLoF(BRCA1) AND hasLoF(TP53) AND Ki-67↑ AND ER-normal AND HER2-normal AND PR-normal
-    HER2-enriched: Patient AND HER2↑ AND ((ER-normal AND PR-normal AND Ki-67↑) OR (Ki-67-normal AND ER↑))
-    Luminal A: Patient AND ER↑ AND PR↑ AND Ki-67-normal
-    Luminal B: Patient AND ER↑ AND ((HER2-normal AND PR-normal AND Ki-67↑) OR HER2↑)
+    Basal: ER-Normal AND HER2-Normal AND Patient AND (hasLoF BRCA1 OR hasLoF BRCA2 OR hasLoF TP53 OR hasUpregulatedPathway Ki-67)
+    Her2: ER-Normal AND Patient AND hasUpregulatedPathway HER2-related_pathway
+    LumA: HER2-Normal AND Ki-67-Normal AND Patient AND hasUpregulatedPathway ER-related_pathway
+    LumB: Patient AND hasUpregulatedPathway ER-related_pathway AND (hasUpregulatedPathway HER2-related_pathway OR hasUpregulatedPathway Ki-67-related_pathway)
+    Normal: ER-Normal AND HER2-Normal AND Ki-67-Normal AND Patient AND notHasMutation BRCA1_p.C61G AND notHasMutation BRCA2_p.Y3308Ter
     """
 
     # ── Basal ──────────────────────────────────────────────────────────────
-    # Patient AND (hasLoF some BRCA1)
-    #        AND (hasLoF some TP53)
-    #        AND (hasUpregulatedPathway some Ki-67)
-    #        AND (hasNormallyRegulatedPathway some ER)
-    #        AND (hasNormallyRegulatedPathway some HER2)
-    #        AND (hasNormallyRegulatedPathway some PR)
+    # ER-Normal AND HER2-Normal AND Patient AND (hasLoF BRCA1 OR hasLoF BRCA2 OR hasLoF TP53 OR hasUpregulatedPathway Ki-67)
     basal_def = owl_intersection(g, [
+        BASE['ER-Normal'],
+        BASE['HER2-Normal'],
         patient_class,
-        owl_some(g, has_lof, BASE['BRCA1']),
-        owl_some(g, has_lof, BASE['TP53']),
-        owl_some(g, has_upregulated_pathway, ki67_related),
-        owl_some(g, has_normally_regulated_pathway, er_related),
-        owl_some(g, has_normally_regulated_pathway, her2_related),
-        owl_some(g, has_normally_regulated_pathway, pr_related),
+        owl_union(g, [
+            owl_some(g, has_lof, BASE['BRCA1']),
+            owl_some(g, has_lof, BASE['BRCA2']),
+            owl_some(g, has_lof, BASE['TP53']),
+            owl_some(g, has_upregulated_pathway, ki67_related),
+        ])
     ])
     g.add((BASE['Basal'], OWL.equivalentClass, basal_def))
 
     # ── Her2 ───────────────────────────────────────────────────────────────
-    # Patient AND HER2↑
-    #        AND ((ER-normal AND PR-normal AND Ki-67↑)      ← classic HER2-enriched
-    #             OR (Ki-67-normal AND ER↑))                ← HER2+/luminal crossover
+    # ER-Normal AND Patient AND hasUpregulatedPathway HER2-related_pathway
     her2_def = owl_intersection(g, [
+        BASE['ER-Normal'],
         patient_class,
         owl_some(g, has_upregulated_pathway, her2_related),
-        owl_union(g, [
-            # Branch 1: ER-normal, PR-normal, Ki-67↑ (classic HER2-enriched)
-            owl_intersection(g, [
-                owl_some(g, has_normally_regulated_pathway, er_related),
-                owl_some(g, has_normally_regulated_pathway, pr_related),
-                owl_some(g, has_upregulated_pathway, ki67_related),
-            ]),
-            # Branch 2: Ki-67-normal, ER↑ (HER2+/luminal crossover)
-            owl_intersection(g, [
-                owl_some(g, has_normally_regulated_pathway, ki67_related),
-                owl_some(g, has_upregulated_pathway, er_related),
-            ]),
-        ]),
     ])
     g.add((BASE['Her2'], OWL.equivalentClass, her2_def))
 
     # ── LumA ───────────────────────────────────────────────────────────────
-    # Patient AND ER↑ AND PR↑ AND Ki-67-normal
-    # (ER+, PR+, Ki-67 low — good prognosis luminal)
+    # HER2-Normal AND Ki-67-Normal AND Patient AND hasUpregulatedPathway ER-related_pathway
     luma_def = owl_intersection(g, [
+        BASE['HER2-Normal'],
+        BASE['Ki-67-Normal'],
         patient_class,
         owl_some(g, has_upregulated_pathway, er_related),
-        owl_some(g, has_upregulated_pathway, pr_related),
-        owl_some(g, has_normally_regulated_pathway, ki67_related),
     ])
     g.add((BASE['LumA'], OWL.equivalentClass, luma_def))
 
     # ── LumB ───────────────────────────────────────────────────────────────
-    # Patient AND ER↑
-    #        AND ((HER2-normal AND PR-normal AND Ki-67↑)   ← LumB HER2-negative
-    #             OR HER2↑)                                ← LumB HER2-positive
+    # Patient AND hasUpregulatedPathway ER-related_pathway AND (hasUpregulatedPathway HER2-related_pathway OR hasUpregulatedPathway Ki-67-related_pathway)
     lumb_def = owl_intersection(g, [
         patient_class,
         owl_some(g, has_upregulated_pathway, er_related),
         owl_union(g, [
-            # Branch 1: HER2-normal, PR-normal, Ki-67↑ (LumB HER2-negative)
-            owl_intersection(g, [
-                owl_some(g, has_normally_regulated_pathway, her2_related),
-                owl_some(g, has_normally_regulated_pathway, pr_related),
-                owl_some(g, has_upregulated_pathway, ki67_related),
-            ]),
-            # Branch 2: HER2↑ (LumB HER2-positive)
             owl_some(g, has_upregulated_pathway, her2_related),
-        ]),
+            owl_some(g, has_upregulated_pathway, ki67_related),
+        ])
     ])
     g.add((BASE['LumB'], OWL.equivalentClass, lumb_def))
 
     # ── Normal ─────────────────────────────────────────────────────────────
-    # Patient AND NOT(Basal OR Her2 OR LumA OR LumB) — catch-all for patients
-    # who don't match the molecular subtype criteria
+    # ER-Normal AND HER2-Normal AND Ki-67-Normal AND Patient AND notHasMutation BRCA1_p.C61G AND notHasMutation BRCA2_p.Y3308Ter
     normal_def = owl_intersection(g, [
+        BASE['ER-Normal'],
+        BASE['HER2-Normal'],
+        BASE['Ki-67-Normal'],
         patient_class,
-        owl_complement(g, owl_union(g, [
-            BASE['Basal'], BASE['Her2'], BASE['LumA'], BASE['LumB'],
-        ])),
+        owl_has_value(g, not_has_mutation, BASE['BRCA1_p.C61G']),
+        owl_has_value(g, not_has_mutation, BASE['BRCA2_p.Y3308Ter']),
     ])
     g.add((BASE['Normal'], OWL.equivalentClass, normal_def))
 
 
 def add_sample_patients(g, patient_class, mutation_class,
-                        has_mutation, has_effect, lof, gof):
+                        has_mutation, not_has_mutation):
     """
     Add sample patient individuals for testing the reasoning chain.
-    Each patient has specific mutations; HermiT should infer:
+    Each patient has specific mutations and explicit notHasMutation assertions for all others.
+    This enables closed-world reasoning under OWA.
+    HermiT should infer:
       1. hasUpregulatedPathway / hasDownregulatedPathway (via property chains)
       2. hasLoF / hasGoF (via property chains with inverse properties)
       3. Breast cancer subtype classification (via equivalent class axioms)
     """
 
+    # Collect all mutation individuals
+    all_mutations = set()
+    for mutation_uri in g.subjects(RDF.type, mutation_class):
+        if isinstance(mutation_uri, BNode):
+            continue  # Skip blank nodes
+        # Only include named individuals
+        if (mutation_uri, RDF.type, OWL.NamedIndividual) in g:
+            all_mutations.add(mutation_uri)
+
+    # Add the Others individual
+    all_mutations.add(BASE['Others'])
+
+    # Helper function to add patient with explicit negative assertions
+    def add_patient_with_negations(patient_uri, label, mutations_list):
+        g.add((patient_uri, RDF.type, OWL.NamedIndividual))
+        g.add((patient_uri, RDF.type, patient_class))
+        g.add((patient_uri, RDFS.label, Literal(label)))
+
+        # Add hasMutation for the patient's mutations
+        mutations_set = set(mutations_list)
+        for mut in mutations_set:
+            g.add((patient_uri, has_mutation, mut))
+
+        # Add notHasMutation for all other mutations
+        for mut in all_mutations:
+            if mut not in mutations_set:
+                g.add((patient_uri, not_has_mutation, mut))
+
     # ── Patient_Basal_Demo ─────────────────────────────────────────────────
     # Expected classification: Basal-like
     # Mutations: BRCA1 p.C61G (LoF) + TP53 p.R342P (LoF → also upregulates Ki-67)
-    # Pathway result: Ki-67 upregulated, no ER/HER2/PR upregulation
-    pt_basal = BASE['Patient_Basal_Demo']
-    g.add((pt_basal, RDF.type, OWL.NamedIndividual))
-    g.add((pt_basal, RDF.type, patient_class))
-    g.add((pt_basal, RDFS.label, Literal("Demo Patient - Expected Basal")))
-    g.add((pt_basal, has_mutation, BASE['BRCA1_p.C61G']))
-    g.add((pt_basal, has_mutation, BASE['TP53_p.R342P']))
+    add_patient_with_negations(
+        BASE['Patient_Basal_Demo'],
+        "Demo Patient - Expected Basal",
+        [BASE['BRCA1_p.C61G'], BASE['TP53_p.R342P']]
+    )
 
     # ── Patient_Her2_Demo ──────────────────────────────────────────────────
     # Expected classification: HER2-enriched
     # Mutations: ERBB2 p.V777L (GoF → upregulates HER2-related pathway)
-    pt_her2 = BASE['Patient_Her2_Demo']
-    g.add((pt_her2, RDF.type, OWL.NamedIndividual))
-    g.add((pt_her2, RDF.type, patient_class))
-    g.add((pt_her2, RDFS.label, Literal("Demo Patient - Expected Her2")))
-    g.add((pt_her2, has_mutation, BASE['ERBB2_p.V777L']))
+    add_patient_with_negations(
+        BASE['Patient_Her2_Demo'],
+        "Demo Patient - Expected Her2",
+        [BASE['ERBB2_p.V777L']]
+    )
 
     # ── Patient_LumA_Demo ──────────────────────────────────────────────────
     # Expected classification: Luminal A
     # Mutations: PIK3CA p.H1047R (GoF → upregulates ER-related pathway)
-    pt_luma = BASE['Patient_LumA_Demo']
-    g.add((pt_luma, RDF.type, OWL.NamedIndividual))
-    g.add((pt_luma, RDF.type, patient_class))
-    g.add((pt_luma, RDFS.label, Literal("Demo Patient - Expected LumA")))
-    g.add((pt_luma, has_mutation, BASE['PIK3CA_p.H1047R']))
+    add_patient_with_negations(
+        BASE['Patient_LumA_Demo'],
+        "Demo Patient - Expected LumA",
+        [BASE['PIK3CA_p.H1047R']]
+    )
 
     # ── Patient_LumB_Demo ──────────────────────────────────────────────────
     # Expected classification: Luminal B
     # Mutations: PIK3CA p.E545K (GoF → ER pathway) + ERBB2 p.S310F (GoF → HER2 pathway)
-    pt_lumb = BASE['Patient_LumB_Demo']
-    g.add((pt_lumb, RDF.type, OWL.NamedIndividual))
-    g.add((pt_lumb, RDF.type, patient_class))
-    g.add((pt_lumb, RDFS.label, Literal("Demo Patient - Expected LumB")))
-    g.add((pt_lumb, has_mutation, BASE['PIK3CA_p.E545K']))
-    g.add((pt_lumb, has_mutation, BASE['ERBB2_p.S310F']))
+    add_patient_with_negations(
+        BASE['Patient_LumB_Demo'],
+        "Demo Patient - Expected LumB",
+        [BASE['PIK3CA_p.E545K'], BASE['ERBB2_p.S310F']]
+    )
 
     # ── Patient_Normal_Demo ────────────────────────────────────────────────
     # Expected classification: Normal-like
-    # Mutations: PTEN p.R130Q (LoF → downregulates ER pathway, but does NOT upregulate any)
-    pt_normal = BASE['Patient_Normal_Demo']
-    g.add((pt_normal, RDF.type, OWL.NamedIndividual))
-    g.add((pt_normal, RDF.type, patient_class))
-    g.add((pt_normal, RDFS.label, Literal("Demo Patient - Expected Normal")))
-    g.add((pt_normal, has_mutation, BASE['PTEN_p.R130Q']))
+    # No mutations - all pathways normal
+    add_patient_with_negations(
+        BASE['Patient_Normal_Demo'],
+        "Demo Patient - Expected Normal",
+        []
+    )
 
 
 if __name__ == "__main__":
