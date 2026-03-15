@@ -1,0 +1,3096 @@
+@prefix : <http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<http://www.semanticweb.org/kevinlee/ontologies/2026/1/untitled-ontology-5> a owl:Ontology .
+
+:Basal a owl:Class ;
+    rdfs:subClassOf :BreastCancerSubType ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( :ER-Normal :HER2-Normal :Patient [ a owl:Class ;
+                        owl:unionOf ( [ a owl:Restriction ;
+                                    owl:onProperty :hasLoF ;
+                                    owl:someValuesFrom :BRCA1 ] [ a owl:Restriction ;
+                                    owl:onProperty :hasLoF ;
+                                    owl:someValuesFrom :BRCA2 ] [ a owl:Restriction ;
+                                    owl:onProperty :hasLoF ;
+                                    owl:someValuesFrom :TP53 ] [ a owl:Restriction ;
+                                    owl:onProperty :hasUpregulatedPathway ;
+                                    owl:someValuesFrom :Ki-67-related_pathway ] ) ] ) ] .
+
+:Her2 a owl:Class ;
+    rdfs:subClassOf :BreastCancerSubType ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( :ER-Normal :Patient [ a owl:Restriction ;
+                        owl:onProperty :hasUpregulatedPathway ;
+                        owl:someValuesFrom :HER2-related_pathway ] ) ] .
+
+:LumA a owl:Class ;
+    rdfs:subClassOf :BreastCancerSubType ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( :HER2-Normal :Ki-67-Normal :Patient [ a owl:Restriction ;
+                        owl:onProperty :hasUpregulatedPathway ;
+                        owl:someValuesFrom :ER-related_pathway ] ) ] .
+
+:LumB a owl:Class ;
+    rdfs:subClassOf :BreastCancerSubType ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( :Patient [ a owl:Class ;
+                        owl:unionOf ( [ a owl:Restriction ;
+                                    owl:onProperty :hasUpregulatedPathway ;
+                                    owl:someValuesFrom :HER2-related_pathway ] [ a owl:Restriction ;
+                                    owl:onProperty :hasUpregulatedPathway ;
+                                    owl:someValuesFrom :Ki-67-related_pathway ] ) ] [ a owl:Restriction ;
+                        owl:onProperty :hasUpregulatedPathway ;
+                        owl:someValuesFrom :ER-related_pathway ] ) ] .
+
+:Normal a owl:Class ;
+    rdfs:subClassOf :BreastCancerSubType ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( :ER-Normal :HER2-Normal :Ki-67-Normal :Patient [ a owl:Restriction ;
+                        owl:hasValue :BRCA1_p.C61G ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :BRCA2_p.Y3308Ter ;
+                        owl:onProperty :notHasMutation ] ) ] .
+
+:Patient_Basal_Demo a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "Demo Patient - Expected Basal" ;
+    :hasMutation :BRCA1_p.C61G,
+        :TP53_p.R342P ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_ .
+
+:Patient_Her2_Demo a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "Demo Patient - Expected Her2" ;
+    :hasMutation :ERBB2_p.V777L ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:Patient_LumA_Demo a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "Demo Patient - Expected LumA" ;
+    :hasMutation :PIK3CA_p.H1047R ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:Patient_LumB_Demo a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "Demo Patient - Expected LumB" ;
+    :hasMutation :ERBB2_p.S310F,
+        :PIK3CA_p.E545K ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:Patient_Normal_Demo a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "Demo Patient - Expected Normal" ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-3C-AALK-01A-11D-A41F-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-3C-AALK-01A-11D-A41F-09" ;
+    :hasMutation :PIK3CA_p.E542K ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-4H-AAAK-01A-12D-A41F-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-4H-AAAK-01A-12D-A41F-09" ;
+    :hasMutation :ERBB2_p.V777L ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-5L-AAT0-01A-12D-A41F-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-5L-AAT0-01A-12D-A41F-09" ;
+    :hasMutation :PIK3CA_p.H1047L ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-A1-A0SI-01A-11D-A142-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-A1-A0SI-01A-11D-A142-09" ;
+    :hasMutation :PIK3CA_p.H1047R,
+        :RB1_p.S829_ ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-A2-A04T-01A-21W-A050-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-A2-A04T-01A-21W-A050-09" ;
+    :hasMutation :PIK3CA_p.H1047Y ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-A2-A04W-01A-31D-A10Y-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-A2-A04W-01A-31D-A10Y-09" ;
+    :hasMutation :PIK3CA_p.H1047R ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-A2-A0D1-01A-11W-A050-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-A2-A0D1-01A-11W-A050-09" ;
+    :hasMutation :PIK3CA_p.E542K ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-A2-A0EM-01A-11W-A050-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-A2-A0EM-01A-11W-A050-09" ;
+    :hasMutation :PIK3CA_p.H1047L ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-A2-A0EW-01A-21D-A10Y-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-A2-A0EW-01A-21D-A10Y-09" ;
+    :hasMutation :PIK3CA_p.Q546R ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-A2-A0EX-01A-21W-A050-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-A2-A0EX-01A-21W-A050-09" ;
+    :hasMutation :PIK3CA_p.E545K ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-A2-A0SY-01A-31D-A099-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-A2-A0SY-01A-31D-A099-09" ;
+    :hasMutation :PIK3CA_p.E545K ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-A2-A0T6-01A-11D-A099-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-A2-A0T6-01A-11D-A099-09" ;
+    :hasMutation :ERBB2_p.L755M,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-A2-A0T7-01A-21D-A099-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-A2-A0T7-01A-21D-A099-09" ;
+    :hasMutation :PIK3CA_p.E542K,
+        :PIK3CA_p.M1043I ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-A2-A3XV-01A-21D-A23C-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-A2-A3XV-01A-21D-A23C-09" ;
+    :hasMutation :ERBB2_p.S310F ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-A7-A0CH-01A-21W-A019-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-A7-A0CH-01A-21W-A019-09" ;
+    :hasMutation :PIK3CA_p.E545K ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-A7-A0CJ-01A-21W-A019-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-A7-A0CJ-01A-21W-A019-09" ;
+    :hasMutation :PIK3CA_p.Q546R ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-A7-A5ZX-01A-12D-A29N-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-A7-A5ZX-01A-12D-A29N-09" ;
+    :hasMutation :PIK3CA_p.E545A ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-A8-A06Z-01A-11W-A019-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-A8-A06Z-01A-11W-A019-09" ;
+    :hasMutation :ERBB2_p.G309A ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-A8-A08Z-01A-21W-A019-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-A8-A08Z-01A-21W-A019-09" ;
+    :hasMutation :ERBB2_p.V842I,
+        :PIK3CA_p.H1047R ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-A8-A094-01A-11W-A019-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-A8-A094-01A-11W-A019-09" ;
+    :hasMutation :AKT1_p.E17K ;
+    :notHasMutation :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-A8-A0A6-01A-12W-A071-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-A8-A0A6-01A-12W-A071-09" ;
+    :hasMutation :ERBB2_p.L755S ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-A8-A0AB-01A-11W-A050-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-A8-A0AB-01A-11W-A050-09" ;
+    :hasMutation :ERBB2_p.L755S ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-AC-A5XS-01A-11D-A29N-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-AC-A5XS-01A-11D-A29N-09" ;
+    :hasMutation :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-AC-A5XU-01A-11D-A28B-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-AC-A5XU-01A-11D-A28B-09" ;
+    :hasMutation :TP53_p.R342P ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_ .
+
+:TCGA_Patient_TCGA-AC-A6IX-01A-12D-A32I-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-AC-A6IX-01A-12D-A32I-09" ;
+    :hasMutation :AKT1_p.E17K ;
+    :notHasMutation :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-AC-A6NO-01A-12D-A33E-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-AC-A6NO-01A-12D-A33E-09" ;
+    :hasMutation :PIK3CA_p.E545A ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-AN-A046-01A-21W-A050-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-AN-A046-01A-21W-A050-09" ;
+    :hasMutation :PTEN_p.R130Q,
+        :PTEN_p.S59_ ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.S287_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-AN-A0FY-01A-11W-A050-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-AN-A0FY-01A-11W-A050-09" ;
+    :hasMutation :RB1_p.R552_ ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-AO-A0J7-01A-11W-A050-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-AO-A0J7-01A-11W-A050-09" ;
+    :hasMutation :PIK3CA_p.Q546K ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-AO-A0JA-01A-11W-A071-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-AO-A0JA-01A-11W-A071-09" ;
+    :hasMutation :PIK3CA_p.E542K,
+        :PTEN_p.Y88_ ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-AO-A12A-01A-21D-A10Y-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-AO-A12A-01A-21D-A10Y-09" ;
+    :hasMutation :PIK3CA_p.E542K,
+        :PIK3CA_p.E545G ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-AR-A1AQ-01A-11D-A12Q-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-AR-A1AQ-01A-11D-A12Q-09" ;
+    :hasMutation :RB1_p.S215_ ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-AR-A5QQ-01A-11D-A28B-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-AR-A5QQ-01A-11D-A28B-09" ;
+    :hasMutation :PIK3CA_p.H1047R,
+        :PTEN_p.R130Q ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-BH-A0BA-01A-11W-A071-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-BH-A0BA-01A-11W-A071-09" ;
+    :hasMutation :PIK3CA_p.H1047R ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-BH-A0BC-01A-22D-A099-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-BH-A0BC-01A-22D-A099-09" ;
+    :hasMutation :PIK3CA_p.H1047L ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-BH-A0BQ-01A-21D-A10Y-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-BH-A0BQ-01A-21D-A10Y-09" ;
+    :hasMutation :PIK3CA_p.E545K ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-BH-A0BV-01A-11W-A019-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-BH-A0BV-01A-11W-A019-09" ;
+    :hasMutation :PIK3CA_p.E545K ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-BH-A0BW-01A-11D-A10Y-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-BH-A0BW-01A-11D-A10Y-09" ;
+    :hasMutation :RB1_p.A74Efs_4 ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-BH-A0DE-01A-11D-A10Y-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-BH-A0DE-01A-11D-A10Y-09" ;
+    :hasMutation :PIK3CA_p.E545A ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-BH-A0DO-01B-11D-A12B-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-BH-A0DO-01B-11D-A12B-09" ;
+    :hasMutation :PIK3CA_p.M1043I ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-BH-A0DP-01A-21W-A071-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-BH-A0DP-01A-21W-A071-09" ;
+    :hasMutation :PIK3CA_p.E542K ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-BH-A0H5-01A-21D-A10Y-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-BH-A0H5-01A-21D-A10Y-09" ;
+    :hasMutation :PTEN_p.R130P ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-BH-A18F-01A-11D-A12B-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-BH-A18F-01A-11D-A12B-09" ;
+    :hasMutation :PIK3CA_p.H1047R,
+        :PIK3CA_p.Q546K ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-BH-A202-01A-11D-A14K-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-BH-A202-01A-11D-A14K-09" ;
+    :hasMutation :PIK3CA_p.H1047R,
+        :RB1_p.S215_ ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-C8-A12Z-01A-11D-A10Y-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-C8-A12Z-01A-11D-A10Y-09" ;
+    :hasMutation :TP53_p.R342P ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_ .
+
+:TCGA_Patient_TCGA-D8-A1XM-01A-21D-A14K-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-D8-A1XM-01A-21D-A14K-09" ;
+    :hasMutation :ERBB2_p.L755S,
+        :PIK3CA_p.E542K ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-D8-A27G-01A-11D-A16D-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-D8-A27G-01A-11D-A16D-09" ;
+    :hasMutation :ERBB2_p.I767M,
+        :PIK3CA_p.H1047R ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-D8-A27P-01A-11D-A16D-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-D8-A27P-01A-11D-A16D-09" ;
+    :hasMutation :AKT1_p.E17K,
+        :PIK3CA_p.H1047R ;
+    :notHasMutation :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-E2-A14Y-01A-21D-A12B-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-E2-A14Y-01A-21D-A12B-09" ;
+    :hasMutation :PIK3CA_p.H1047R ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:TCGA_Patient_TCGA-OL-A66N-01A-12D-A31U-09 a :Patient,
+        owl:NamedIndividual ;
+    rdfs:label "TCGA Patient TCGA-OL-A66N-01A-12D-A31U-09" ;
+    :hasMutation :ERBB2_p.V777L ;
+    :notHasMutation :AKT1_p.E17K,
+        :BRCA1_p.C61G,
+        :BRCA2_p.Y3308Ter,
+        :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V842I,
+        :Others,
+        :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R,
+        :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_,
+        :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_,
+        :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_,
+        :TP53_p.R342P .
+
+:hasDownregulatedPathway a owl:ObjectProperty ;
+    rdfs:domain :Patient ;
+    rdfs:range :Pathway ;
+    rdfs:subPropertyOf owl:topObjectProperty ;
+    owl:propertyChainAxiom ( :hasMutation :downregulatesPathway ) .
+
+:hasEffect a owl:ObjectProperty ;
+    rdfs:domain :Mutation ;
+    rdfs:range :Mutation_Effect ;
+    rdfs:subPropertyOf owl:topObjectProperty .
+
+:hasGoF a owl:ObjectProperty ;
+    rdfs:domain :Patient ;
+    rdfs:range :Gene ;
+    owl:propertyChainAxiom ( :hasMutation :isGoFMutationOf ) .
+
+:hasGoFMutation a owl:ObjectProperty ;
+    rdfs:subPropertyOf :hasMutation ;
+    owl:inverseOf :isGoFMutationOf .
+
+:hasLoFMutation a owl:ObjectProperty ;
+    rdfs:subPropertyOf :hasMutation ;
+    owl:inverseOf :isLoFMutationOf .
+
+:AKT1 a :AKT1,
+        :Gene,
+        owl:Class,
+        owl:NamedIndividual ;
+    :hasGoFMutation :AKT1_p.E17K ;
+    rdfs:subClassOf :Gene .
+
+:Cell_Proliferation_due_to_TP53_Loss a :Ki-67-related_pathway,
+        :Pathway,
+        owl:NamedIndividual ;
+    rdfs:label "Cell Proliferation due to TP53 Loss" .
+
+:Constitutive_Signaling_by_AKT1_E17K_in_Cancer a :ER-related_pathway,
+        :Pathway,
+        owl:NamedIndividual ;
+    rdfs:label "Constitutive Signaling by AKT1 E17K in Cancer" .
+
+:ER a :ER,
+        :Gene,
+        owl:Class,
+        owl:NamedIndividual ;
+    rdfs:subClassOf :Gene .
+
+:ERBB2 a :ERBB2,
+        :Gene,
+        owl:Class,
+        owl:NamedIndividual ;
+    rdfs:label "ERBB2 (HER2)" ;
+    :hasGoFMutation :ERBB2_p.D769H,
+        :ERBB2_p.D769Y,
+        :ERBB2_p.G309A,
+        :ERBB2_p.I767M,
+        :ERBB2_p.L755M,
+        :ERBB2_p.L755S,
+        :ERBB2_p.L755W,
+        :ERBB2_p.R678Q,
+        :ERBB2_p.S310F,
+        :ERBB2_p.V777L,
+        :ERBB2_p.V842I ;
+    rdfs:subClassOf :Gene .
+
+:Ki-67 a :Gene,
+        :Ki-67,
+        owl:Class,
+        owl:NamedIndividual ;
+    rdfs:subClassOf :Gene .
+
+:Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability a :ER-related_pathway,
+        :Pathway,
+        owl:NamedIndividual ;
+    rdfs:label "Loss of function of TP53 in cancer due to loss of tetramerization ability" .
+
+:PIK3CA a :Gene,
+        :PIK3CA,
+        owl:Class,
+        owl:NamedIndividual ;
+    :hasGoFMutation :PIK3CA_p.E542K,
+        :PIK3CA_p.E545A,
+        :PIK3CA_p.E545G,
+        :PIK3CA_p.E545K,
+        :PIK3CA_p.H1047L,
+        :PIK3CA_p.H1047R,
+        :PIK3CA_p.H1047Y,
+        :PIK3CA_p.M1043I,
+        :PIK3CA_p.Q546K,
+        :PIK3CA_p.Q546R ;
+    rdfs:subClassOf :Gene .
+
+:PR a :Gene,
+        :PR,
+        owl:Class,
+        owl:NamedIndividual ;
+    rdfs:subClassOf :Gene .
+
+:PTEN a :Gene,
+        :PTEN,
+        owl:Class,
+        owl:NamedIndividual ;
+    :hasLoFMutation :PTEN_p.Q149_,
+        :PTEN_p.R130P,
+        :PTEN_p.R130Q,
+        :PTEN_p.S287_,
+        :PTEN_p.S59_,
+        :PTEN_p.Y88_ ;
+    rdfs:subClassOf :Gene .
+
+:RB1 a :Gene,
+        :RB1,
+        owl:Class,
+        owl:NamedIndividual ;
+    :hasLoFMutation :RB1_p.A74Efs_4,
+        :RB1_p.R455_,
+        :RB1_p.R552_,
+        :RB1_p.S215_,
+        :RB1_p.S829_ ;
+    rdfs:subClassOf :Gene .
+
+:SMAD4 a :Gene,
+        :SMAD4,
+        owl:Class,
+        owl:NamedIndividual ;
+    :hasLoFMutation :SMAD4_p.E526_,
+        :SMAD4_p.Q245_,
+        :SMAD4_p.Q334_ ;
+    rdfs:subClassOf :Gene .
+
+:Signaling_by_ERBB2_TMD_JMD_mutants a :HER2-related_pathway,
+        :Pathway,
+        owl:NamedIndividual ;
+    rdfs:label "Signaling by ERBB2 TMD/JMD mutants" .
+
+:downregulatesPathway a owl:ObjectProperty ;
+    rdfs:domain :Mutation ;
+    rdfs:range :Pathway ;
+    rdfs:subPropertyOf :affectsPathway,
+        owl:topObjectProperty .
+
+:upregulatesPathway a owl:ObjectProperty ;
+    rdfs:domain :Mutation ;
+    rdfs:range :Pathway ;
+    rdfs:subPropertyOf :affectsPathway,
+        owl:topObjectProperty .
+
+<http://www.semanticweb.org/owl/owlapi/turtle#hasDownregulatedPathway> a owl:DatatypeProperty .
+
+<http://www.semanticweb.org/owl/owlapi/turtle#hasNormallyRegulatedPathway> a owl:DatatypeProperty .
+
+<http://www.semanticweb.org/owl/owlapi/turtle#hasUpregulatedPathway> a owl:DatatypeProperty .
+
+:BRCA1 a :BRCA1,
+        :Gene,
+        owl:Class,
+        owl:NamedIndividual ;
+    :hasLoFMutation :BRCA1_p.C61G ;
+    rdfs:subClassOf :Gene .
+
+:BRCA2 a :BRCA2,
+        :Gene,
+        owl:Class,
+        owl:NamedIndividual ;
+    :hasLoFMutation :BRCA2_p.Y3308Ter ;
+    rdfs:subClassOf :Gene .
+
+:DNA_Repair_Pathway a owl:Class ;
+    rdfs:subClassOf :Pathway .
+
+:Defective_Homologous_Recombination_Repair a :DNA_Repair_Pathway,
+        :Pathway,
+        owl:NamedIndividual ;
+    rdfs:label "Defective Homologous Recombination Repair" .
+
+:Ki-67-Normal a owl:Class ;
+    rdfs:subClassOf :Patient ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( :Patient [ a owl:Restriction ;
+                        owl:hasValue :TP53_p.R342P ;
+                        owl:onProperty :notHasMutation ] ) ] .
+
+:PR-related_pathway a owl:Class ;
+    rdfs:subClassOf :Pathway .
+
+:PathwayCategory a owl:Class ;
+    rdfs:subClassOf :Pathway ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:unionOf ( :ER-related_pathway :HER2-related_pathway :Ki-67-related_pathway :PR-related_pathway ) ] .
+
+:Signaling_by_ERBB2_ECD_mutants a :HER2-related_pathway,
+        :Pathway,
+        owl:NamedIndividual ;
+    rdfs:label "Signaling by ERBB2 ECD mutants" .
+
+:TP53 a :Gene,
+        :TP53,
+        owl:Class,
+        owl:NamedIndividual ;
+    :hasLoFMutation :TP53_p.R342P ;
+    rdfs:subClassOf :Gene .
+
+:affectsPathway a owl:ObjectProperty ;
+    rdfs:domain :Mutation ;
+    rdfs:range :Pathway .
+
+:isGoFMutationOf a owl:ObjectProperty .
+
+:isLoFMutationOf a owl:ObjectProperty .
+
+:ER-Normal a owl:Class ;
+    rdfs:subClassOf :Patient ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( :Patient [ a owl:Restriction ;
+                        owl:hasValue :AKT1_p.E17K ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :PIK3CA_p.E542K ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :PIK3CA_p.E545A ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :PIK3CA_p.E545G ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :PIK3CA_p.E545K ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :PIK3CA_p.H1047L ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :PIK3CA_p.H1047R ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :PIK3CA_p.H1047Y ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :PIK3CA_p.M1043I ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :PIK3CA_p.Q546K ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :PIK3CA_p.Q546R ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :PTEN_p.Q149_ ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :PTEN_p.R130P ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :PTEN_p.R130Q ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :PTEN_p.S287_ ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :PTEN_p.S59_ ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :PTEN_p.Y88_ ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :RB1_p.A74Efs_4 ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :RB1_p.R455_ ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :RB1_p.R552_ ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :RB1_p.S215_ ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :RB1_p.S829_ ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :SMAD4_p.E526_ ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :SMAD4_p.Q245_ ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :SMAD4_p.Q334_ ;
+                        owl:onProperty :notHasMutation ] ) ] .
+
+:HER2-Normal a owl:Class ;
+    rdfs:subClassOf :Patient ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( :Patient [ a owl:Restriction ;
+                        owl:hasValue :ERBB2_p.D769H ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :ERBB2_p.D769Y ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :ERBB2_p.G309A ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :ERBB2_p.I767M ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :ERBB2_p.L755M ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :ERBB2_p.L755S ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :ERBB2_p.L755W ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :ERBB2_p.R678Q ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :ERBB2_p.S310F ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :ERBB2_p.V777L ;
+                        owl:onProperty :notHasMutation ] [ a owl:Restriction ;
+                        owl:hasValue :ERBB2_p.V842I ;
+                        owl:onProperty :notHasMutation ] ) ] .
+
+:SMAD4_MH2_Domain_Mutants_in_Cancer a :ER-related_pathway,
+        :Pathway,
+        owl:NamedIndividual ;
+    rdfs:label "SMAD4 MH2 Domain Mutants in Cancer" .
+
+:hasLoF a owl:ObjectProperty ;
+    rdfs:domain :Patient ;
+    rdfs:range :Gene ;
+    owl:propertyChainAxiom ( :hasMutation :isLoFMutationOf ) .
+
+:Mutation_Effect a owl:Class ;
+    rdfs:subClassOf :Mutation .
+
+:BreastCancerSubType a owl:Class .
+
+:Defective_translocation_of_RB1_mutants_to_the_nucleus a :ER-related_pathway,
+        :Pathway,
+        owl:NamedIndividual ;
+    rdfs:label "Defective translocation of RB1 mutants to the nucleus" .
+
+:Ki-67-related_pathway a owl:Class ;
+    rdfs:subClassOf :Pathway .
+
+:PTEN_Loss_of_Function_in_Cancer a :ER-related_pathway,
+        :Pathway,
+        owl:NamedIndividual ;
+    rdfs:label "PTEN Loss of Function in Cancer" .
+
+:Partial_LoF a :Mutation_Effect,
+        owl:NamedIndividual .
+
+:hasMutation a owl:ObjectProperty ;
+    rdfs:domain :Patient ;
+    rdfs:subPropertyOf owl:topObjectProperty ;
+    owl:propertyDisjointWith :notHasMutation .
+
+:HER2-related_pathway a owl:Class ;
+    rdfs:subClassOf :Pathway .
+
+:hasUpregulatedPathway a owl:ObjectProperty ;
+    rdfs:domain :Patient ;
+    rdfs:range :PathwayCategory ;
+    rdfs:subPropertyOf owl:topObjectProperty ;
+    owl:propertyChainAxiom ( :hasMutation :upregulatesPathway ) .
+
+:Signaling_by_ERBB2_KD_Mutants a :HER2-related_pathway,
+        :Pathway,
+        owl:NamedIndividual ;
+    rdfs:label "Signaling by ERBB2 KD Mutants" .
+
+:Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer a :ER-related_pathway,
+        :Pathway,
+        owl:NamedIndividual ;
+    rdfs:label "Constitutive Signaling by Aberrant PI3K in Cancer" .
+
+:ER-related_pathway a owl:Class ;
+    rdfs:subClassOf :Pathway .
+
+:LoF a :Mutation_Effect,
+        owl:NamedIndividual .
+
+:Pathway a owl:Class .
+
+:GoF a :Mutation_Effect,
+        owl:NamedIndividual .
+
+:Gene a owl:Class .
+
+:notHasMutation a owl:ObjectProperty ;
+    rdfs:domain :Patient ;
+    rdfs:range :Mutation .
+
+:Mutation a owl:Class .
+
+:Others a owl:NamedIndividual .
+
+:AKT1_p.E17K a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "AKT1 p.E17K" ;
+    :hasEffect :GoF ;
+    :upregulatesPathway :Constitutive_Signaling_by_AKT1_E17K_in_Cancer .
+
+:BRCA1_p.C61G a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "BRCA1 p.C61G" ;
+    :downregulatesPathway :Defective_Homologous_Recombination_Repair ;
+    :hasEffect :LoF .
+
+:BRCA2_p.Y3308Ter a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "BRCA2 p.Y3308*" ;
+    :downregulatesPathway :Defective_Homologous_Recombination_Repair ;
+    :hasEffect :LoF .
+
+:ERBB2_p.D769H a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "ERBB2 p.D769H" ;
+    :hasEffect :GoF ;
+    :upregulatesPathway :Signaling_by_ERBB2_KD_Mutants .
+
+:ERBB2_p.D769Y a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "ERBB2 p.D769Y" ;
+    :hasEffect :GoF ;
+    :upregulatesPathway :Signaling_by_ERBB2_KD_Mutants .
+
+:ERBB2_p.G309A a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "ERBB2 p.G309A" ;
+    :hasEffect :GoF ;
+    :upregulatesPathway :Signaling_by_ERBB2_ECD_mutants .
+
+:ERBB2_p.I767M a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "ERBB2 p.I767M" ;
+    :hasEffect :GoF ;
+    :upregulatesPathway :Signaling_by_ERBB2_KD_Mutants .
+
+:ERBB2_p.L755M a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "ERBB2 p.L755M" ;
+    :hasEffect :GoF ;
+    :upregulatesPathway :Signaling_by_ERBB2_KD_Mutants .
+
+:ERBB2_p.L755S a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "ERBB2 p.L755S" ;
+    :hasEffect :GoF ;
+    :upregulatesPathway :Signaling_by_ERBB2_KD_Mutants .
+
+:ERBB2_p.L755W a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "ERBB2 p.L755W" ;
+    :hasEffect :GoF ;
+    :upregulatesPathway :Signaling_by_ERBB2_KD_Mutants .
+
+:ERBB2_p.R678Q a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "ERBB2 p.R678Q" ;
+    :hasEffect :GoF ;
+    :upregulatesPathway :Signaling_by_ERBB2_TMD_JMD_mutants .
+
+:ERBB2_p.S310F a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "ERBB2 p.S310F" ;
+    :hasEffect :GoF ;
+    :upregulatesPathway :Signaling_by_ERBB2_ECD_mutants .
+
+:ERBB2_p.V777L a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "ERBB2 p.V777L" ;
+    :hasEffect :GoF ;
+    :upregulatesPathway :Signaling_by_ERBB2_KD_Mutants .
+
+:ERBB2_p.V842I a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "ERBB2 p.V842I" ;
+    :hasEffect :GoF ;
+    :upregulatesPathway :Signaling_by_ERBB2_KD_Mutants .
+
+:PIK3CA_p.E542K a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "PIK3CA p.E542K" ;
+    :hasEffect :GoF ;
+    :upregulatesPathway :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer .
+
+:PIK3CA_p.E545A a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "PIK3CA p.E545A" ;
+    :hasEffect :GoF ;
+    :upregulatesPathway :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer .
+
+:PIK3CA_p.E545G a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "PIK3CA p.E545G" ;
+    :hasEffect :GoF ;
+    :upregulatesPathway :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer .
+
+:PIK3CA_p.E545K a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "PIK3CA p.E545K" ;
+    :hasEffect :GoF ;
+    :upregulatesPathway :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer .
+
+:PIK3CA_p.H1047L a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "PIK3CA p.H1047L" ;
+    :hasEffect :GoF ;
+    :upregulatesPathway :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer .
+
+:PIK3CA_p.H1047R a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "PIK3CA p.H1047R" ;
+    :hasEffect :GoF ;
+    :upregulatesPathway :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer .
+
+:PIK3CA_p.H1047Y a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "PIK3CA p.H1047Y" ;
+    :hasEffect :GoF ;
+    :upregulatesPathway :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer .
+
+:PIK3CA_p.M1043I a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "PIK3CA p.M1043I" ;
+    :hasEffect :GoF ;
+    :upregulatesPathway :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer .
+
+:PIK3CA_p.Q546K a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "PIK3CA p.Q546K" ;
+    :hasEffect :GoF ;
+    :upregulatesPathway :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer .
+
+:PIK3CA_p.Q546R a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "PIK3CA p.Q546R" ;
+    :hasEffect :GoF ;
+    :upregulatesPathway :Constitutive_Signaling_by_Aberrant_PI3K_in_Cancer .
+
+:PTEN_p.Q149_ a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "PTEN p.Q149*" ;
+    :downregulatesPathway :PTEN_Loss_of_Function_in_Cancer ;
+    :hasEffect :LoF .
+
+:PTEN_p.R130P a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "PTEN p.R130P" ;
+    :downregulatesPathway :PTEN_Loss_of_Function_in_Cancer ;
+    :hasEffect :LoF .
+
+:PTEN_p.R130Q a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "PTEN p.R130Q" ;
+    :downregulatesPathway :PTEN_Loss_of_Function_in_Cancer ;
+    :hasEffect :LoF .
+
+:PTEN_p.S287_ a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "PTEN p.S287*" ;
+    :downregulatesPathway :PTEN_Loss_of_Function_in_Cancer ;
+    :hasEffect :LoF .
+
+:PTEN_p.S59_ a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "PTEN p.S59*" ;
+    :downregulatesPathway :PTEN_Loss_of_Function_in_Cancer ;
+    :hasEffect :LoF .
+
+:PTEN_p.Y88_ a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "PTEN p.Y88*" ;
+    :downregulatesPathway :PTEN_Loss_of_Function_in_Cancer ;
+    :hasEffect :LoF .
+
+:RB1_p.A74Efs_4 a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "RB1 p.A74Efs*4" ;
+    :downregulatesPathway :Defective_translocation_of_RB1_mutants_to_the_nucleus ;
+    :hasEffect :LoF,
+        :Partial_LoF .
+
+:RB1_p.R455_ a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "RB1 p.R455*" ;
+    :downregulatesPathway :Defective_translocation_of_RB1_mutants_to_the_nucleus ;
+    :hasEffect :LoF,
+        :Partial_LoF .
+
+:RB1_p.R552_ a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "RB1 p.R552*" ;
+    :downregulatesPathway :Defective_translocation_of_RB1_mutants_to_the_nucleus ;
+    :hasEffect :LoF,
+        :Partial_LoF .
+
+:RB1_p.S215_ a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "RB1 p.S215*" ;
+    :downregulatesPathway :Defective_translocation_of_RB1_mutants_to_the_nucleus ;
+    :hasEffect :LoF,
+        :Partial_LoF .
+
+:RB1_p.S829_ a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "RB1 p.S829*" ;
+    :downregulatesPathway :Defective_translocation_of_RB1_mutants_to_the_nucleus ;
+    :hasEffect :LoF,
+        :Partial_LoF .
+
+:SMAD4_p.E526_ a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "SMAD4 p.E526*" ;
+    :downregulatesPathway :SMAD4_MH2_Domain_Mutants_in_Cancer ;
+    :hasEffect :LoF .
+
+:SMAD4_p.Q245_ a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "SMAD4 p.Q245*" ;
+    :downregulatesPathway :SMAD4_MH2_Domain_Mutants_in_Cancer ;
+    :hasEffect :LoF .
+
+:SMAD4_p.Q334_ a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "SMAD4 p.Q334*" ;
+    :downregulatesPathway :SMAD4_MH2_Domain_Mutants_in_Cancer ;
+    :hasEffect :LoF .
+
+:TP53_p.R342P a :Mutation,
+        owl:NamedIndividual ;
+    rdfs:label "TP53 p.R342P" ;
+    :downregulatesPathway :Loss_of_function_of_TP53_in_cancer_due_to_loss_of_tetramerization_ability ;
+    :hasEffect :LoF,
+        :Partial_LoF ;
+    :upregulatesPathway :Cell_Proliferation_due_to_TP53_Loss .
+
+:Patient a owl:Class ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom :PathwayCategory ;
+            owl:onProperty :hasUpregulatedPathway ] .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( :DNA_Repair_Pathway :ER-related_pathway :HER2-related_pathway :Ki-67-related_pathway :PR-related_pathway ) .
+
+[] a owl:AllDisjointProperties ;
+    owl:members ( <http://www.semanticweb.org/owl/owlapi/turtle#hasDownregulatedPathway> <http://www.semanticweb.org/owl/owlapi/turtle#hasNormallyRegulatedPathway> <http://www.semanticweb.org/owl/owlapi/turtle#hasUpregulatedPathway> ) .
+

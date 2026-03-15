@@ -1,0 +1,51 @@
+Patient_ID,Mutation_Count,Mutations,Pathways
+TCGA-A8-A0AB-01A-11W-A050-09,1,ERBB2 p.L755S,Signaling by ERBB2 KD Mutants
+TCGA-A2-A0EW-01A-21D-A10Y-09,1,PIK3CA p.Q546R,Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-D8-A27G-01A-11D-A16D-09,2,ERBB2 p.I767M; PIK3CA p.H1047R,Signaling by ERBB2 KD Mutants; Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-D8-A1XM-01A-21D-A14K-09,2,ERBB2 p.L755S; PIK3CA p.E542K,Signaling by ERBB2 KD Mutants; Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-AO-A12A-01A-21D-A10Y-09,2,PIK3CA p.E542K; PIK3CA p.E545G,Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-BH-A0BA-01A-11W-A071-09,2,PIK3CA p.H1047R; PIK3CA p.H1047R,Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-A1-A0SI-01A-11D-A142-09,2,RB1 p.S829*; PIK3CA p.H1047R,Constitutive Signaling by Aberrant PI3K in Cancer; Defective translocation of RB1 mutants to the nucleus
+TCGA-A2-A0D1-01A-11W-A050-09,1,PIK3CA p.E542K,Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-A7-A0CJ-01A-21W-A019-09,1,PIK3CA p.Q546R,Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-AC-A6NO-01A-12D-A33E-09,1,PIK3CA p.E545A,Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-BH-A0BC-01A-22D-A099-09,2,PIK3CA p.H1047L; PIK3CA p.H1047L,Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-5L-AAT0-01A-12D-A41F-09,1,PIK3CA p.H1047L,Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-A2-A04T-01A-21W-A050-09,1,PIK3CA p.H1047Y,Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-A2-A0SY-01A-31D-A099-09,1,PIK3CA p.E545K,Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-AN-A0FY-01A-11W-A050-09,1,RB1 p.R552*,Defective translocation of RB1 mutants to the nucleus
+TCGA-AR-A1AQ-01A-11D-A12Q-09,1,RB1 p.S215*,Defective translocation of RB1 mutants to the nucleus
+TCGA-D8-A27P-01A-11D-A16D-09,2,AKT1 p.E17K; PIK3CA p.H1047R,Constitutive Signaling by Aberrant PI3K in Cancer; Constitutive Signaling by AKT1 E17K in Cancer
+TCGA-AN-A046-01A-21W-A050-09,2,PTEN p.S59*; PTEN p.R130Q,PTEN Loss of Function in Cancer
+TCGA-A2-A04W-01A-31D-A10Y-09,1,PIK3CA p.H1047R,Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-BH-A0DE-01A-11D-A10Y-09,2,PIK3CA p.E545A; PIK3CA p.E545A,Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-4H-AAAK-01A-12D-A41F-09,1,ERBB2 p.V777L,Signaling by ERBB2 KD Mutants
+TCGA-AC-A5XU-01A-11D-A28B-09,1,TP53 p.R342P,Loss of function of TP53 in cancer due to loss of tetramerization ability
+TCGA-E2-A14Y-01A-21D-A12B-09,2,PIK3CA p.H1047R; PIK3CA p.H1047R,Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-BH-A0H5-01A-21D-A10Y-09,2,PTEN p.R130P; PTEN p.R130P,PTEN Loss of Function in Cancer
+TCGA-AR-A5QQ-01A-11D-A28B-09,2,PTEN p.R130Q; PIK3CA p.H1047R,PTEN Loss of Function in Cancer; Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-A2-A0T7-01A-21D-A099-09,2,PIK3CA p.E542K; PIK3CA p.M1043I,Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-A8-A0A6-01A-12W-A071-09,1,ERBB2 p.L755S,Signaling by ERBB2 KD Mutants
+TCGA-A2-A0T6-01A-11D-A099-09,3,ERBB2 p.R678Q; ERBB2 p.L755M; ERBB2 p.L755W,Signaling by ERBB2 KD Mutants; Signaling by ERBB2 TMD/JMD mutants
+TCGA-A7-A0CH-01A-21W-A019-09,2,PIK3CA p.E545K; PIK3CA p.E545K,Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-A2-A3XV-01A-21D-A23C-09,1,ERBB2 p.S310F,Signaling by ERBB2 ECD mutants
+TCGA-BH-A0BW-01A-11D-A10Y-09,2,RB1 p.A74Efs*4; RB1 p.A74Efs*4,Defective translocation of RB1 mutants to the nucleus
+TCGA-A2-A0EX-01A-21W-A050-09,1,PIK3CA p.E545K,Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-BH-A202-01A-11D-A14K-09,2,RB1 p.S215*; PIK3CA p.H1047R,Constitutive Signaling by Aberrant PI3K in Cancer; Defective translocation of RB1 mutants to the nucleus
+TCGA-BH-A0DO-01B-11D-A12B-09,1,PIK3CA p.M1043I,Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-AC-A5XS-01A-11D-A29N-09,4,PIK3CA p.E545K; PIK3CA p.E545G; PIK3CA p.E545K; PIK3CA p.E545G,Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-A8-A08Z-01A-21W-A019-09,2,ERBB2 p.V842I; PIK3CA p.H1047R,Signaling by ERBB2 KD Mutants; Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-AO-A0JA-01A-11W-A071-09,2,PTEN p.Y88*; PIK3CA p.E542K,PTEN Loss of Function in Cancer; Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-A2-A0EM-01A-11W-A050-09,1,PIK3CA p.H1047L,Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-BH-A0BQ-01A-21D-A10Y-09,2,PIK3CA p.E545K; PIK3CA p.E545K,Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-OL-A66N-01A-12D-A31U-09,1,ERBB2 p.V777L,Signaling by ERBB2 KD Mutants
+TCGA-3C-AALK-01A-11D-A41F-09,1,PIK3CA p.E542K,Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-BH-A18F-01A-11D-A12B-09,2,PIK3CA p.Q546K; PIK3CA p.H1047R,Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-BH-A0BV-01A-11W-A019-09,2,PIK3CA p.E545K; PIK3CA p.E545K,Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-A8-A06Z-01A-11W-A019-09,1,ERBB2 p.G309A,Signaling by ERBB2 ECD mutants
+TCGA-AO-A0J7-01A-11W-A050-09,1,PIK3CA p.Q546K,Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-A7-A5ZX-01A-12D-A29N-09,2,PIK3CA p.E545A; PIK3CA p.E545A,Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-AC-A6IX-01A-12D-A32I-09,1,AKT1 p.E17K,Constitutive Signaling by AKT1 E17K in Cancer
+TCGA-A8-A094-01A-11W-A019-09,1,AKT1 p.E17K,Constitutive Signaling by AKT1 E17K in Cancer
+TCGA-BH-A0DP-01A-21W-A071-09,2,PIK3CA p.E542K; PIK3CA p.E542K,Constitutive Signaling by Aberrant PI3K in Cancer
+TCGA-C8-A12Z-01A-11D-A10Y-09,1,TP53 p.R342P,Loss of function of TP53 in cancer due to loss of tetramerization ability
